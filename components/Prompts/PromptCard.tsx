@@ -13,7 +13,7 @@ const PromptCard = ({ prompt }: Props) => {
   return (
     <Card
       radius="lg"
-      className="w-full md:w-[31%] 2xl:w-[23%] max-h-[410px] p-4 bg-[#130f23] m-3"
+      className="w-full md:w-[31%] 2xl:w-[23%] max-h-[410px] p-4 bg-[#130f23] m-3 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20"
     >
       <div className="relative">
         <Image

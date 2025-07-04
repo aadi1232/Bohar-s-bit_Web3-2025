@@ -51,7 +51,17 @@ const Header = ({ user, activeItem,isSellerExist }: Props) => {
         <div>
           <Link href={"/"}>
             <h1 className="font-Inter text-3xl cursor-pointer">
-              <span className="text-[#835DED]">Prompt</span>Verse
+              <span
+              className="bg-clip-text text-transparent"
+              style={{
+                background: "linear-gradient(90deg, #835DED, #FF7E5F, #FEB47B)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+              >
+              Prompt
+              </span>
+              Verse
             </h1>
           </Link>
         </div>
