@@ -56,6 +56,19 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
     <>
       <div>
         <div className="banner">
+          {/* Add background video */}
+            <video
+            className="banner-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            src="/Assets/banner_video.mp4"
+            >
+            {/* Fallback for browsers that don't support video */}
+            Your browser does not support the video tag.
+            </video>
+
           <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
           <Hero />
         </div>

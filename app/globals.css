@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: #030015!important;
+  background: #110b30!important;
   font-size: 16px;
   font-weight: 400;
   max-width: 100vw;
@@ -21,11 +21,13 @@ body {
 
 .banner {
   min-height: 100vh;
-  background-image: url("https://pixner.net/aikeu/assets/images/banner/banner-one-bg.png");
+  /* Remove or comment out the background-image property */
+  /* background-image: url("https://pixner.net/aikeu/assets/images/banner/banner-one-bg.png"); */
   background-position: center center;
   background-size: cover;
   overflow: hidden;
   z-index: 1;
+  position: relative; /* Add position relative */
 }
 @media screen and (max-width: 760px) {
      .banner{
@@ -41,7 +43,6 @@ body {
   height: 500px;
   min-height: 300px;
   border-radius: 50%;
-  background: rgba(75, 255, 223, 0.24);
   filter: blur(227px);
   /* z-index: -1; */
 }
@@ -55,7 +56,6 @@ body {
   height: 430px;
   min-height: 300px;
   border-radius: 50%;
-  background: rgba(75, 169, 255, 0.44);
   filter: blur(272px);
   /* z-index: -1; */
 }
@@ -72,4 +72,15 @@ body {
 }
 .sellers-banner {
   background: linear-gradient(132deg, #5fec46 0%, #46e695 100%);
+}
+
+/* Add styles for the background video */
+.banner-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  z-index: -1; /* Place behind other content */
 }

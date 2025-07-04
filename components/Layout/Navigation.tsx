@@ -35,7 +35,7 @@ const Navigation = ({ activeItem }: Props) => {
         <Link key={item.title} href={item.href}>
           <h5
             className={`inline-block md:px-4 xl:px-8 py-5 md:py-0 text-[18px] font-[500] font-Inter ${
-              activeItem === index && "text-[#6dff4b]"
+              activeItem === index && "text-[#835DED]"
             }`}
           >
             {item.title}

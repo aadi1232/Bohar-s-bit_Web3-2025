@@ -12,7 +12,7 @@ const Footer = (props: Props) => {
         <div>
           <Link href={"/"}>
             <h1 className="font-Inter text-3xl cursor-pointer">
-              <span className="text-[#64ff4c]">Bec</span>odemy
+              <span className="text-[#835DED]">Prompt</span>Verse
             </h1>
           </Link>
         </div>
@@ -46,7 +46,7 @@ const Footer = (props: Props) => {
         </div>
       </div>
       <p className={`${styles.paragraph} text-center`}>
-        Copyright © 2023 Becodemy . All Rights Reserved
+        Copyright © 2025 PromptVerse. All Rights Reserved
       </p>
       <br />
       <br />
