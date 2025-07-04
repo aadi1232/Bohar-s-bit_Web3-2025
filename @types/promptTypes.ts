@@ -18,7 +18,7 @@ export type propmt = {
   promptUrl: PromptFiles[];
   sellerId: string;
   orders: Orders[];
-  status: "Live" | "Decliend" | "Pending";
+  status: "Live" ;
   createdAt: Date;
   updatedAt: Date;
 };

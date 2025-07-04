@@ -303,7 +303,8 @@ const UploadPrompt = (props: Props) => {
         <div className="w-full">
           <input
             type="file"
-            required
+            // required
+            name="image"
             accept="image/*"
             multiple
             id="file"

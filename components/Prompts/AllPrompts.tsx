@@ -41,7 +41,7 @@ const AllPrompts = ({
       price: "$US" + item.price,
       rating: item.rating,
       purchased: item.orders?.length,
-      status: item.status,
+      status: "Live",
     });
   });
 
