@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import Provider from "./(Providers)/NextUiProvider";
 import { Toaster } from "react-hot-toast";
+import Web3Provider from "./(Providers)/Web3Provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -27,8 +28,10 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${inter.variable} ${monserrat.variable}`}>
           <Provider>
-            <Toaster position="top-center" reverseOrder={false} />
-            {children}
+            <Web3Provider>
+              <Toaster position="top-center" reverseOrder={false} />
+              {children}
+            </Web3Provider>
           </Provider>
         </body>
       </html>

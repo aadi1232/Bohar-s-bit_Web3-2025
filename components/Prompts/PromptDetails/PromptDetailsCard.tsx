@@ -6,6 +6,10 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { IoCloseOutline } from "react-icons/io5";
+import { useWalletClient, useAccount } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { getPromptMarketplaceContract } from "@/utils/promptMarketplace";
+import { ethers } from "ethers";
 
 const PromptDetailsCard = ({
   promptData,
@@ -28,6 +32,31 @@ const PromptDetailsCard = ({
     100;
 
   const promptDiscount = percentageDifference?.toFixed(0);
+
+  const { isConnected } = useAccount();
+  const { openConnectModal } = useConnectModal();
+  const { data: walletClient } = useWalletClient();
+
+  const priceEth = String(promptData?.price);
+  const handleBuy = async () => {
+    if (!isConnected) {
+      openConnectModal?.();
+      return;
+    }
+    try {
+      if (!walletClient) throw new Error("Wallet not found");
+      if (!priceEth || isNaN(Number(priceEth))) throw new Error("Invalid price");
+      const ethersProvider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await ethersProvider.getSigner();
+      const contract = getPromptMarketplaceContract(signer);
+      await contract.buyPrompt(promptData.id, {
+        value: ethers.parseEther(priceEth),
+      });
+      alert("Purchase successful!");
+    } catch (err: any) {
+      alert("Transaction failed: " + (err?.message || err));
+    }
+  };
 
   return (
     <div className="bg-[#1211023] p-3 w-full min-h-[50vh] shadow rounded-xl mt-8">
@@ -147,7 +176,7 @@ const PromptDetailsCard = ({
                 Soon you will be able to purchase prompts securely using your
                 Ethereum wallet (MetaMask, WalletConnect, etc). Stay tuned!
               </p>
-              <Button color="primary" className="w-full" disabled>
+              <Button color="primary" className="w-full" onClick={handleBuy}>
                 Pay with Web3 (ETH)
               </Button>
             </div>

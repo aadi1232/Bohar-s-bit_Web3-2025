@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 type Props = {
   activeItem: number;
@@ -38,6 +39,7 @@ const Navigation = ({ activeItem }: Props) => {
           </h5>
         </Link>
       ))}
+      <ConnectButton />
     </div>
   );
 };
