@@ -70,7 +70,7 @@ const PromptCard = ({ prompt }: Props) => {
       <br />
       <Link href={`/prompt/${prompt.id}`} className="w-full">
         <div
-          className={`${styles.button} !py-2 !px-3 text-center mb-3 w-full text-white bg-transparent border border-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]`}
+          className={`${styles.button} !py-2 !px-3 text-center mb-3 w-full text-white bg-transparent border border-[#835DED] hover:bg-[#835DED] hover:text-black duration-300 transition-opacity font-Inter font-[600]`}
         >
           Get Prompts
         </div>
