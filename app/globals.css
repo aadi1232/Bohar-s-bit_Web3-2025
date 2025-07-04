@@ -71,7 +71,7 @@ body {
   background-color: transparent !important;
 }
 .sellers-banner {
-  background: linear-gradient(132deg, #5fec46 0%, #46e695 100%);
+  background: linear-gradient(132deg, #7738dd 0%, #8400ff 100%);
 }
 
 /* Add styles for the background video */
@@ -83,4 +83,47 @@ body {
   height: 90%;
   object-fit: cover;
   z-index: -1; /* Place behind other content */
+}
+
+/* Custom utility for the specific cubic-bezier timing function */
+.ease-custom {
+  transition-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Utility class for 30deg rotation */
+.rotate-30 {
+  transform: rotate(0deg);
+}
+
+/* Add these custom navigation styles */
+.navbar-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+  color: #F49BAB; /* Using the existing purple color from your active state */
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #F49BAB;
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after {
+  width: 75%;
+  left: 15px;
+}
+
+/* Adjust the underline position for desktop */
+@media (min-width: 768px) {
+  .navbar-link::after {
+    bottom: -5px;
+  }
 }
