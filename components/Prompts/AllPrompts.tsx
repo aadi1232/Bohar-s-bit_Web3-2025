@@ -38,7 +38,7 @@ const AllPrompts = ({
     rows.push({
       id: item.id,
       name: item.name,
-      price: "$US" + item.price,
+      price: item.price + " ETH",
       rating: item.rating,
       purchased: item.orders?.length,
       status: "Live",

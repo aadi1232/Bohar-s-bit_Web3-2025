@@ -12,5 +12,4 @@ export type Shop = {
   createdAt: Date;
   updatedAt: Date;
   userId: string;
-  bank: withdawMethod | null;
 };

@@ -234,7 +234,7 @@ const UploadPrompt = (props: Props) => {
         <div className="md:flex md:w-full">
           <Input
             type="number"
-            label="Propmt estimated price"
+            label="Propmt estimated price (ETH)"
             variant="bordered"
             value={promptData.estimatedPrice}
             onChange={(e) =>
@@ -243,13 +243,13 @@ const UploadPrompt = (props: Props) => {
                 estimatedPrice: e.target.value,
               }))
             }
-            placeholder="US$40"
+            placeholder="0.05 ETH"
             required
             className="mb-6 md:mb-0"
           />
           <Input
             type="number"
-            label="Propmt price *"
+            label="Propmt price (ETH) *"
             value={promptData.price}
             onChange={(e) =>
               setPromptData((prevData) => ({
@@ -258,7 +258,7 @@ const UploadPrompt = (props: Props) => {
               }))
             }
             variant="bordered"
-            placeholder="US$29.99"
+            placeholder="0.03 ETH"
             className="md:ml-10"
             required
           />

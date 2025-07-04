@@ -7,15 +7,7 @@ import { useEffect, useState } from "react";
 import { propmt } from "@/@types/promptTypes";
 import PromptCardLoader from "@/utils/PromptCardLoader";
 
-const PromptDetails = ({
-  promptData,
-  stripePromise,
-  clientSecret,
-}: {
-  promptData: propmt | undefined;
-  stripePromise: any;
-  clientSecret: string;
-}) => {
+const PromptDetails = ({ promptData }: { promptData: propmt | undefined }) => {
   const [prompts, setPrompts] = useState<propmt[]>();
   const [loading, setLoading] = useState(true);
 
@@ -40,11 +32,7 @@ const PromptDetails = ({
 
   return (
     <div>
-      <PromptDetailsCard
-        promptData={promptData}
-        clientSecret={clientSecret}
-        stripePromise={stripePromise}
-      />
+      <PromptDetailsCard promptData={promptData} />
       <br />
       <br />
       <PromptInformation promptData={promptData} />
@@ -80,3 +68,6 @@ const PromptDetails = ({
 };
 
 export default PromptDetails;
+
+// When displaying price, use:
+// <span>{prompt.price} ETH</span>

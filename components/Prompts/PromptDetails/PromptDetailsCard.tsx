@@ -6,8 +6,6 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { IoCloseOutline } from "react-icons/io5";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./CheckoutForm";
 
 const PromptDetailsCard = ({
   promptData,
@@ -24,11 +22,12 @@ const PromptDetailsCard = ({
 
   const tagsList = tags.split(",").map((tag: string) => tag.trim());
 
-
-  const percentageDifference = ((promptData?.estimatedPrice - promptData?.price) / promptData?.estimatedPrice) * 100;
+  const percentageDifference =
+    ((promptData?.estimatedPrice - promptData?.price) /
+      promptData?.estimatedPrice) *
+    100;
 
   const promptDiscount = percentageDifference?.toFixed(0);
-  
 
   return (
     <div className="bg-[#1211023] p-3 w-full min-h-[50vh] shadow rounded-xl mt-8">
@@ -82,12 +81,12 @@ const PromptDetailsCard = ({
               <span
                 className={`${styles.label} inline-block pt-4 !text-xl line-through`}
               >
-                ${promptData?.estimatedPrice}
+                {promptData?.estimatedPrice} ETH
               </span>
               <span
                 className={`${styles.label} inline-block pt-4 !text-xl text-white pl-3`}
               >
-                ${promptData?.price}
+                {promptData?.price} ETH
               </span>
             </div>
             <Ratings rating={promptData?.rating} />
@@ -99,7 +98,7 @@ const PromptDetailsCard = ({
           <br />
           <div className="w-full">
             <span
-              className={`${styles.label} !text-2xl pl-2 text-white font-Monserrat`}
+              className={`${styles.label} !text-2xl pl-2 text-white font-MonMontserrat`}
             >
               Tags
             </span>
@@ -124,31 +123,33 @@ const PromptDetailsCard = ({
               radius="full"
               className={`${styles.button} h-[45px] font-[400] bg-[#64ff4b] !text-indigo-900 md:ml-2`}
             >
-              Buy now ${promptData?.price}
+              Buy now {promptData?.price} ETH
             </Button>
           </div>
         </div>
       </div>
       {open && (
-        <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
-          <div className="w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3">
-            <div className="w-full flex justify-end">
-              <IoCloseOutline
-                size={40}
-                className="text-black cursor-pointer"
-                onClick={() => setOpen(!open)}
-              />
-            </div>
-            <div className="w-full">
-              {stripePromise && clientSecret && (
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <CheckoutForm
-                    setOpen={setOpen}
-                    open={open}
-                    promptData={promptData}
-                  />
-                </Elements>
-              )}
+        <div className="w-full h-screen bg-[#00000080] fixed top-0 left-0 z-50 flex items-center justify-center">
+          <div className="w-[95%] max-w-md min-h-[320px] bg-[#18182a] rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center relative">
+            <button
+              className="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl"
+              onClick={() => setOpen(false)}
+              aria-label="Close"
+            >
+              <IoCloseOutline size={32} />
+            </button>
+            <div className="flex flex-col items-center justify-center w-full h-full">
+              <span className="text-5xl mb-4">🦊</span>
+              <h2 className="text-2xl font-bold text-white mb-2">
+                Web3 Payment Coming Soon
+              </h2>
+              <p className="text-gray-300 mb-6 text-center">
+                Soon you will be able to purchase prompts securely using your
+                Ethereum wallet (MetaMask, WalletConnect, etc). Stay tuned!
+              </p>
+              <Button color="primary" className="w-full" disabled>
+                Pay with Web3 (ETH)
+              </Button>
             </div>
           </div>
         </div>

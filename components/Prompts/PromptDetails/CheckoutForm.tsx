@@ -9,6 +9,7 @@ import {
 } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
 
+// This component is deprecated. All payments are handled via Web3 (ETH) only.
 const CheckoutForm = ({
   setOpen,
   open,
@@ -48,22 +49,13 @@ const CheckoutForm = ({
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement id="link-authentication-element" />
-      <PaymentElement id="payment-element" />
-      <button
-        id="submit"
-        className={`${styles.button} !bg-[crimson] mt-4 !p-2 !w-full`}
-      >
-        <span>Pay Now ${promptData?.price}</span>
-      </button>
-      {/* Show amy error or success message */}
-      {message && (
-        <div id="payment-message" className="text-[red] font-Poppins pt-2">
-          {message}
-        </div>
-      )}
-    </form>
+    <div className="w-full text-center p-10">
+      <h2 className="text-2xl font-bold">Checkout</h2>
+      <p className="mt-4">
+        Payments are now handled via Web3 (ETH) only. Please use your crypto
+        wallet to complete the purchase.
+      </p>
+    </div>
   );
 };
 
