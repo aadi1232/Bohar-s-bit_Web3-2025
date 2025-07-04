@@ -8,37 +8,36 @@ type Props = {};
 
 const rowOneImages = [
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/large-slider/one.png",
+    url: "https://i.pinimg.com/736x/14/95/c0/1495c0ecc9b4affa1a74b4c834843b75.jpg",
   },
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/large-slider/two.png",
+    url: "https://images.unsplash.com/photo-1729525589533-29ad6a3e90be?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/large-slider/three.png",
+    url: "https://i.pinimg.com/736x/cc/3c/ce/cc3ccef00a00addd322f3546bbde660d.jpg",
   },
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/large-slider/four.png",
+    url: "https://i.pinimg.com/736x/cf/df/59/cfdf594dd56b13ea760e1869e094f2bc.jpg",
   },
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/large-slider/five.png",
+    url: "https://images.unsplash.com/photo-1634689033402-a132c62b310e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
-
 const rowTwoImages = [
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/small-slider/one.png",
+    url: "https://i.pinimg.com/736x/82/41/60/824160ee752e55fece61be47c5bb14a5.jpg",
   },
   {
     url: "https://pixner.net/aikeu/assets/images/banner/small-slider/two.png",
   },
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/small-slider/three.png",
+    url: "https://i.pinimg.com/736x/21/ec/cb/21eccb05f73cbf266193bd3288bbe4bf.jpg",
   },
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/small-slider/four.png",
+    url: "https://i.pinimg.com/736x/e2/75/0c/e2750c9e582c3e68d6ff5a74a2b4c670.jpg",
   },
   {
-    url: "https://pixner.net/aikeu/assets/images/banner/small-slider/five.png",
+    url: "https://i.pinimg.com/736x/0b/bf/0c/0bbf0c5578c638d5a1bd697d9aa2a027.jpg",
   },
 ];
 
@@ -114,14 +113,14 @@ const Hero = (props: Props) => {
             <div>
               <MarQuee direction="right" speed={40} gradient={false}>
                 {rowOneImages.map((i, index) => (
-                  <div 
+                  <div
                     key={index}
                     className="group relative mx-2 md:mx-4 transform transition-all duration-500"
                   >
                     <Image
                       src={i.url}
                       alt=""
-                      className="w-[200px] md:w-[500px] rounded-[20px] shadow-2xl transition-all duration-300 group-hover:shadow-purple-500/30"
+                      className="w-[200px] md:w-[500px] h-[120px] md:h-[300px] rounded-[20px] shadow-2xl transition-all duration-300 group-hover:shadow-purple-500/30 object-cover"
                       width={500}
                       height={300}
                     />
@@ -133,19 +132,19 @@ const Hero = (props: Props) => {
                 ))}
               </MarQuee>
             </div>
-            
+
             {/* Second row - moving left */}
             <div>
               <MarQuee direction="left" speed={35} gradient={false}>
                 {rowTwoImages.map((i, index) => (
-                  <div 
+                  <div
                     key={index}
                     className="group relative mx-2 md:mx-4 transform transition-all duration-500"
                   >
                     <Image
                       src={i.url}
                       alt=""
-                      className="w-[200px] md:w-[500px] rounded-[20px] shadow-2xl transition-all duration-300 group-hover:shadow-blue-500/30"
+                      className="w-[200px] md:w-[500px] h-[120px] md:h-[300px] rounded-[20px] shadow-2xl transition-all duration-300 group-hover:shadow-blue-500/30 object-cover"
                       width={500}
                       height={300}
                     />
