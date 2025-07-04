@@ -80,8 +80,7 @@ const Header = ({ user, activeItem,isSellerExist }: Props) => {
           <Navigation activeItem={activeItem} />
         </div>
         
-        <div className="hidden md:flex items-center ml-10">
-          <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer" />
+        <div className="hidden md:flex items-center ml-10">    
           {user ? (
             <DropDown
               user={user}
