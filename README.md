@@ -1,37 +1,40 @@
-## 📋 Tutorial
+# 🚀 PromptVerse: AI Prompt Marketplace Powered by Web3
 
-This GitHub repository hosts the code associated with a comprehensive tutorial featured on our YouTube channel, <a href="https://www.youtube.com/@BecodemyOfficial" target="_blank"><b>Becodemy</b></a>. 
+PromptVerse is a next-generation AI prompt marketplace that leverages the power of Web3 and AI to create a decentralized, creator-friendly platform for buying, selling, and reselling AI prompts.
 
-For those who find visual learning more effective, this serves as an ideal reference. Follow our tutorial to acquire a step-by-step understanding of constructing projects like these in a beginner-friendly approach!
-<a href="https://www.youtube.com/watch?v=mzbOqy5DWzE&t=216s" target="_blank">Link</a>
+## 🌟 What is PromptVerse?
 
-## 🤖 Introduction
+PromptVerse is not just a marketplace—it's a platform where creators can mint their AI prompts as digital assets (NFTs), sell them directly to users, and earn royalties every time their prompt is resold. With integrated AI, users also get smart suggestions for prompts, making discovery and creativity seamless.
 
-Welcome to our AI Prompt Selling Marketplace, a cutting-edge project. Dive into the trendiest topic on the internet – Artificial Intelligence – as we guide you through building your own AI Prompt Selling Marketplace.
+### Key Features
 
-What makes this project even more exciting? It's fully completed and ready for deployment, allowing you to kickstart your AI startup effortlessly. Explore the added convenience of a separate Admin Dashboard, empowering you to take control of the main website seamlessly. Get ready to embark on your AI journey with this comprehensive and innovative project.
+- **Web3 Payments:** All transactions are handled using Ethereum (ETH), removing traditional payment gateways and enabling true digital ownership.
+- **Prompt as NFT:** Each prompt is minted as a unique token on the blockchain, ensuring authenticity and traceable ownership.
+- **Royalty System:** Original creators automatically receive royalties on every resale of their prompt, powered by smart contracts (ERC-721/ERC-1155 + ERC-2981).
+- **AI-Powered Suggestions:** Integrated AI recommends prompts to users based on trends and interests.
+- **Decentralized & Transparent:** All purchases, sales, and royalties are recorded on-chain for full transparency.
 
 ## ⚙️ Tech Stack
 
 - Next.js
 - NextUI
 - TailwindCSS
-- Clerk
-- Prisma
+- Clerk (Authentication)
+- Prisma (Database ORM)
 - TypeScript
-
+- ethers.js (Web3 integration)
+- Solidity (Smart Contracts)
+- Cloudinary (Media Storage)
+- AI/ML APIs (for prompt suggestions)
 
 ## 🤸 Getting Started
 
-Follow these steps to set up the project locally on your machine.
-
 **Prerequisites**
-
-Make sure you have the following installed on your machine:
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
+- [npm](https://www.npmjs.com/)
+- [MetaMask](https://metamask.io/) or any Ethereum wallet (for testing Web3 features)
 
 **Cloning the Repository**
 
@@ -40,8 +43,6 @@ git clone https://github.com/shahriarsajeeb/AI-Prompt-Selling-MarketPlace.git
 ```
 
 **Installation**
-
-Install the project dependencies using npm:
 
 ```bash
 npm install
@@ -53,9 +54,22 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🪙 Web3 & Smart Contracts
+
+- All prompt purchases and resales are handled via Ethereum transactions.
+- Smart contracts ensure automatic royalty distribution to original creators.
+- Users connect their wallets (MetaMask, WalletConnect) to interact with the marketplace.
+
+## 🤖 AI-Powered Prompt Suggestions
+
+- The platform uses AI to recommend trending and relevant prompts to users, enhancing creativity and discovery.
 
 ## 🚨 Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+PromptVerse is the future of digital creativity—decentralized, transparent, and creator-first.

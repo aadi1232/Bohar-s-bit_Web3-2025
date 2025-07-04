@@ -110,7 +110,7 @@ const UserAllOrders = ({
       rows.push({
         id: item.id,
         name: item.prompt.name,
-        price: "$US" + item.prompt.price,
+        price: item.prompt.price + " ETH",
         download: item.prompt.promptUrl,
         OrderedAt: format(item.createdAt),
         prompt: item.prompt,

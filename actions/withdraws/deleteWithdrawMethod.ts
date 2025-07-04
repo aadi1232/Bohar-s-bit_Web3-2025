@@ -1,17 +1,2 @@
-"use server";
-import prisma from "@/lib/prismaDb";
-
-
-export const deleteWithDrawMethod = async (id:string) => {
-  try {
-    console.log(id);
-    const withDrawMethod = await prisma.banks.delete({
-      where: {
-        id,
-      },
-    });
-    return withDrawMethod;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// This file is deprecated. Withdraw method actions are removed for Web3 migration.
+export {};

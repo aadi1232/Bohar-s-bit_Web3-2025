@@ -1,20 +1,2 @@
-"use server";
-
-import prisma from "@/lib/prismaDb";
-
-export const sellerInvoices = async ({ sellerId }: { sellerId: string }) => {
-  try {
-    const invoices = await prisma.withdraws.findMany({
-      where: {
-        sellerId,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    return invoices;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// This file is deprecated. Withdraw actions are removed for Web3 migration.
+export {};

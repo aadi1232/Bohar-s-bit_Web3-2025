@@ -61,7 +61,7 @@ const Page = (props: Props) => {
     <div className="w-full h-screen flex flex-col justify-center">
       <div>
         <h1 className={`${styles.heading} text-center font-Monserrat`}>
-          Start to selling with us
+          Start to selling with us !
         </h1>
         <form
           className="2xl:w-[40%] xl:w-[50%] md:w-[70%] w-[90%] m-auto"
@@ -76,7 +76,7 @@ const Page = (props: Props) => {
               onChange={(e) =>
                 setShopData({ ...shopData, name: e.target.value })
               }
-              label="Becodemy"
+              label="PromptVerse"
               size="sm"
               variant="bordered"
             />

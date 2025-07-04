@@ -13,7 +13,7 @@ const PromptCard = ({ prompt }: Props) => {
   return (
     <Card
       radius="lg"
-      className="w-full md:w-[31%] 2xl:w-[23%] max-h-[410px] p-4 bg-[#130f23] m-3"
+      className="w-full md:w-[31%] 2xl:w-[23%] max-h-[410px] p-4 bg-[#130f23] m-3 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20"
     >
       <div className="relative">
         <Image
@@ -57,7 +57,7 @@ const PromptCard = ({ prompt }: Props) => {
         <h3 className={`${styles.label} text-[18px] text-white`}>
           {prompt?.name}
         </h3>
-        <p className={`${styles.paragraph}`}>${prompt?.price}</p>
+        <p className={`${styles.paragraph}`}>{prompt?.price} ETH</p>
       </div>
       <Divider className="bg-[#ffffff18] my-3" />
       <div className="w-full flex items-center justify-between">
@@ -70,7 +70,7 @@ const PromptCard = ({ prompt }: Props) => {
       <br />
       <Link href={`/prompt/${prompt.id}`} className="w-full">
         <div
-          className={`${styles.button} !py-2 !px-3 text-center mb-3 w-full text-white bg-transparent border border-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]`}
+          className={`${styles.button} !py-2 !px-3 text-center mb-3 w-full text-white bg-transparent border border-[#835DED] hover:bg-[#835DED] hover:text-black duration-300 transition-opacity font-Inter font-[600]`}
         >
           Get Prompts
         </div>

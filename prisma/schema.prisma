@@ -19,8 +19,7 @@ model Shops {
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
   userId           String      @unique
-  bank             Banks?
-  withdraws        withdraws[]
+  withdraws         withdraws[]
 }
 
 model Images {
@@ -56,8 +55,6 @@ model Orders {
   userId         String
   promptId       String   @db.ObjectId
   prompt         Prompts  @relation(fields: [promptId], references: [id])
-  payment_method String
-  payment_id     String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
@@ -82,17 +79,7 @@ model Prompts {
   updatedAt        DateTime      @updatedAt
 }
 
-model Banks {
-  id                  String @id @default(auto()) @map("_id") @db.ObjectId
-  bank_name           String
-  bank_address        String
-  sellerId            String @unique @db.ObjectId
-  bank                Shops  @relation(fields: [sellerId], references: [id])
-  account_holder_name String
-  account_number      Float
-  routing_number      Float
-  swift_code          String
-}
+
 
 model withdraws {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId

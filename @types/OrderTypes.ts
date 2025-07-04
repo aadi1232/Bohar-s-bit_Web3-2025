@@ -5,8 +5,7 @@ export type Orders = {
   userId: string;
   promptId: string;
   prompt: propmt;
-  payment_method: string;
-  payment_id: string;
+
   createdAt: Date;
   updatedAt: Date;
 };

@@ -6,25 +6,20 @@ import { User } from "@clerk/nextjs/server";
 import { Divider } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import PromptDetails from "@/components/Prompts/PromptDetails/PromptDetails";
-import { stripePaymentIntent } from "@/actions/payment/paymentAction";
-import { loadStripe } from "@stripe/stripe-js";
 import { propmt } from "@/@types/promptTypes";
 import Loader from "@/utils/Loader";
+import { Button } from "@nextui-org/react";
 
 const PromptDetailsPage = ({
   user,
   isSellerExist,
-  publishAbleKey,
   promptId,
 }: {
   user: User | undefined;
   isSellerExist: boolean;
-  publishAbleKey: string;
   promptId: string;
 }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [stripePromise, setStripePromise] = useState<any>();
-  const [clientSecret, setClientSecret] = useState("");
   const [prompt, setPrompt] = useState<propmt>();
   const [loading, setLoading] = useState(true);
 
@@ -51,21 +46,6 @@ const PromptDetailsPage = ({
     }
   }, [isMounted]);
 
-  useEffect(() => {
-    if (prompt) {
-      if (publishAbleKey) {
-        const amount = Math.round(prompt.price * 100);
-        newPaymentIntent({ amount });
-        setStripePromise(loadStripe(publishAbleKey));
-      }
-    }
-  }, [publishAbleKey, prompt]);
-
-  const newPaymentIntent = async ({ amount }: { amount: Number }) => {
-    const paymentIntent = await stripePaymentIntent({ amount });
-    setClientSecret(paymentIntent?.client_secret);
-  };
-
   if (!isMounted) {
     return null;
   }
@@ -82,11 +62,18 @@ const PromptDetailsPage = ({
           </div>
           <div>
             <div className="w-[95%] md:w-[80%] xl:w-[85%] 2xl:w-[80%] m-auto">
-              <PromptDetails
-                promptData={prompt}
-                stripePromise={stripePromise}
-                clientSecret={clientSecret}
-              />
+              <PromptDetails promptData={prompt} />
+              <div className="text-center mt-8">
+                <p className="text-2xl font-bold text-green-400 mb-2">
+                  {prompt?.price} ETH
+                </p>
+                <Button color="primary" disabled>
+                  Pay using Web3 (ETH)
+                </Button>
+                <p className="text-gray-400 mt-2 text-sm">
+                  Web3 payment coming soon!
+                </p>
+              </div>
               <Divider className="bg-[#ffffff14] mt-5" />
               <Footer />
             </div>

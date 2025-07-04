@@ -62,17 +62,15 @@ const PromptInformation = ({ promptData }: Props) => {
                 {item.title === "Reviews" && (
                   <div className="">
                     {promptData &&
-                      promptData.reviews.map((item:any, index:number) => (
+                      promptData.reviews.map((item: any, index: number) => (
                         <ReviewCard item={item} key={index} />
                       ))}
 
-                      {
-                        promptData?.reviews?.length === 0 && (
-                          <h5 className={`${styles.paragraph} text-center py-5`}>
-                            No Reviews have to show!
-                          </h5>
-                        )
-                      }
+                    {promptData?.reviews?.length === 0 && (
+                      <h5 className={`${styles.paragraph} text-center py-5`}>
+                        No Reviews have to show!
+                      </h5>
+                    )}
                   </div>
                 )}
               </div>
