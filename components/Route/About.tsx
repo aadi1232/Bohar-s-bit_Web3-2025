@@ -25,7 +25,7 @@ const About = (props: Props) => {
           advanced.
         </p>
         <Button
-          className={`${styles.button} bg-[#2551b0] font-[500] h-[45px]`}
+          className={`${styles.button} bg-[#835DED] font-[500] h-[45px]`}
           onClick={() => router.push("/marketplace")}
         >
           Visit Shop
