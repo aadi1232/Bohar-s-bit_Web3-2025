@@ -15,15 +15,15 @@ const navItems = [
     href: "/about",
   },
   {
-    title: "Web3 Market",
+    title: "Marketplace",
     href: "/web3-marketplace",
   },
   {
-    title: "Mint NFT",
+    title: "Mint Prompt",
     href: "/mint-nft",
   },
   {
-    title: "My NFTs",
+    title: "My Prompts",
     href: "/my-nfts",
   },
   // {
@@ -34,16 +34,16 @@ const navItems = [
 
 const Navigation = ({ activeItem }: Props) => {
   return (
-    <div className="block md:flex">
+    <div className="block md:flex md:items-center md:whitespace-nowrap">
       {navItems.map((item, index) => (
         <Link key={item.title} href={item.href}>
-          <h5
-            className={`navbar-link inline-block md:px-4 xl:px-8 py-5 md:py-0 text-[18px] font-[500] font-Inter ${
+            <h5
+            className={`navbar-link inline-block md:px-1.5 lg:px-2 xl:px-3 py-5 md:py-0 text-[16px] lg:text-[18px] font-[500] font-Inter whitespace-nowrap ${
               activeItem === index && "text-[#F49BAB]"
             }`}
-          >
+            >
             {item.title}
-          </h5>
+            </h5>
         </Link>
       ))}
     </div>

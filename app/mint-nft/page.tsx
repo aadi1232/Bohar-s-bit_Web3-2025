@@ -20,7 +20,7 @@ const MintNFTPage = async () => {
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#FF7E5F]/10 rounded-full filter blur-3xl animate-pulse"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#835DED]/5 rounded-full filter blur-3xl"></div>
       
-      <Header user={user.user} activeItem={0} isSellerExist={!!sellerInfo?.shop} />
+      <Header user={user.user} activeItem={3} isSellerExist={!!sellerInfo?.shop} />
       
       <div className="relative z-10">
         <MintPromptForm />

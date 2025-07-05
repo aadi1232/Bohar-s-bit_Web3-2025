@@ -22,7 +22,7 @@ const About = (props: Props) => {
         </p>
         <Button
           className={`${styles.button} bg-gradient-to-r from-[#835DED] via-[#FF8C42] to-[#FF3C6F] font-[600] h-[50px] shadow-lg hover:scale-105 transition-transform duration-200`}
-          onClick={() => router.push("/marketplace")}
+          onClick={() => router.push("/web3-marketplace")}
           radius="full"
           size="lg"
           endContent={

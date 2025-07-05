@@ -49,10 +49,10 @@ const Header = ({ user, activeItem, isSellerExist }: Props) => {
         active && "fixed top-0 left-0 bg-[#000] z-[9999]"
       }`}
     >
-      <div className="hidden md:w-[90%] mx-auto md:flex items-center justify-between">
-        <div>
+      <div className="hidden md:w-[90%] xl:w-[85%] mx-auto md:flex items-center justify-between">
+        <div className="flex-shrink-0">
           <Link href={"/"}>
-            <h1 className="font-Inter text-3xl cursor-pointer">
+            <h1 className="font-Inter text-2xl xl:text-3xl cursor-pointer">
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -68,10 +68,10 @@ const Header = ({ user, activeItem, isSellerExist }: Props) => {
             </h1>
           </Link>
         </div>
-        <div className="flex">
+        <div className="flex-1 flex justify-center">
           <Navigation activeItem={activeItem} />
         </div>
-        <div className="flex items-center ml-10 space-x-4">
+        <div className="flex items-center space-x-3 xl:space-x-4 flex-shrink-0 min-w-[350px] justify-end">
         
 
           {/* Web3 Wallet Connection */}
