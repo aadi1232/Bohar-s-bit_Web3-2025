@@ -242,73 +242,76 @@ export const Web3Marketplace: React.FC<MarketplaceProps> = ({
             <CardBody>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Search */}
-                <Input
-                  type="text"
-                  placeholder="Search AI prompts..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  startContent={<FaSearch className="text-[#835DED]" />}
-                  className="bg-[#1a0f3a] border-[#835DED]/30"
-                  classNames={{
-                    input: "text-white placeholder:text-gray-400",
-                    inputWrapper: "bg-[#1a0f3a] border border-[#835DED]/30 hover:border-[#835DED]/50 focus-within:border-[#835DED] transition-all duration-300",
-                  }}
-                />
+                <div className="h-14 flex items-center">
+                  <Input
+                    type="text"
+                    placeholder="Search AI prompts..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    startContent={<FaSearch className="text-[#835DED]" />}
+                    classNames={{
+                      input: "text-white placeholder:text-gray-400",
+                      inputWrapper: "bg-[#1a0f3a] border border-[#835DED]/30 hover:border-[#835DED]/50 focus-within:border-[#835DED] transition-all duration-300 rounded-lg h-14",
+                    }}
+                  />
+                </div>
 
                 {/* Sort */}
-                <Select
-                  label="Sort by"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-[#1a0f3a]"
-                  classNames={{
-                    trigger: "bg-[#1a0f3a] border border-[#835DED]/30 hover:border-[#835DED]/50 transition-all duration-300",
-                    label: "text-gray-300",
-                    value: "text-white",
-                  }}
-                >
-                  <SelectItem key="newest" value="newest" className="text-white">
-                    Newest First
-                  </SelectItem>
-                  <SelectItem key="oldest" value="oldest" className="text-white">
-                    Oldest First
-                  </SelectItem>
-                  <SelectItem key="price-low" value="price-low" className="text-white">
-                    Price: Low to High
-                  </SelectItem>
-                  <SelectItem key="price-high" value="price-high" className="text-white">
-                    Price: High to Low
-                  </SelectItem>
-                </Select>
+                <div className="h-14 flex items-center">
+                  <Select
+                    label="Sort by"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    classNames={{
+                      trigger: "bg-[#1a0f3a] border border-[#835DED]/30 hover:border-[#835DED]/50 transition-all duration-300 rounded-lg h-14",
+                      label: "text-gray-300",
+                      value: "text-white",
+                    }}
+                  >
+                    <SelectItem key="newest" value="newest" className="text-white">
+                      Newest First
+                    </SelectItem>
+                    <SelectItem key="oldest" value="oldest" className="text-white">
+                      Oldest First
+                    </SelectItem>
+                    <SelectItem key="price-low" value="price-low" className="text-white">
+                      Price: Low to High
+                    </SelectItem>
+                    <SelectItem key="price-high" value="price-high" className="text-white">
+                      Price: High to Low
+                    </SelectItem>
+                  </Select>
+                </div>
 
                 {/* Price Filter */}
-                <Select
-                  label="Price range"
-                  value={priceFilter}
-                  onChange={(e) => setPriceFilter(e.target.value)}
-                  className="bg-[#1a0f3a]"
-                  classNames={{
-                    trigger: "bg-[#1a0f3a] border border-[#835DED]/30 hover:border-[#835DED]/50 transition-all duration-300",
-                    label: "text-gray-300",
-                    value: "text-white",
-                  }}
-                >
-                  <SelectItem key="all" value="all" className="text-white">
-                    All Prices
-                  </SelectItem>
-                  <SelectItem key="under1" value="under1" className="text-white">
-                    Under 1 ETH
-                  </SelectItem>
-                  <SelectItem key="1to5" value="1to5" className="text-white">
-                    1-5 ETH
-                  </SelectItem>
-                  <SelectItem key="5to10" value="5to10" className="text-white">
-                    5-10 ETH
-                  </SelectItem>
-                  <SelectItem key="over10" value="over10" className="text-white">
-                    Over 10 ETH
-                  </SelectItem>
-                </Select>
+                <div className="h-14 flex items-center">
+                  <Select
+                    label="Price range"
+                    value={priceFilter}
+                    onChange={(e) => setPriceFilter(e.target.value)}
+                    classNames={{
+                      trigger: "bg-[#1a0f3a] border border-[#835DED]/30 hover:border-[#835DED]/50 transition-all duration-300 rounded-lg h-14",
+                      label: "text-gray-300",
+                      value: "text-white",
+                    }}
+                  >
+                    <SelectItem key="all" value="all" className="text-white">
+                      All Prices
+                    </SelectItem>
+                    <SelectItem key="under1" value="under1" className="text-white">
+                      Under 1 ETH
+                    </SelectItem>
+                    <SelectItem key="1to5" value="1to5" className="text-white">
+                      1-5 ETH
+                    </SelectItem>
+                    <SelectItem key="5to10" value="5to10" className="text-white">
+                      5-10 ETH
+                    </SelectItem>
+                    <SelectItem key="over10" value="over10" className="text-white">
+                      Over 10 ETH
+                    </SelectItem>
+                  </Select>
+                </div>
 
                 {/* Clear Filters */}
                 <Button

@@ -14,12 +14,18 @@ const MyNFTsPage = async () => {
   }
 
   return (
-    <>
-      <Header user={user.user} activeItem={0} isSellerExist={!!sellerInfo?.shop} />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#110b30] to-[#1a0f3a] relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#835DED]/10 rounded-full filter blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#FF7E5F]/10 rounded-full filter blur-3xl animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#835DED]/5 rounded-full filter blur-3xl"></div>
+      
+      <Header user={user.user} activeItem={4} isSellerExist={!!sellerInfo?.shop} />
+      
+      <div className="relative z-10">
         <UserProfile />
       </div>
-    </>
+    </div>
   );
 };
 

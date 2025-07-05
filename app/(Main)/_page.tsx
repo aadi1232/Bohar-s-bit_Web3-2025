@@ -62,24 +62,24 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
       <div>
         <div className="banner">
           {/* Add background video */}
-            <video
+          <video
             className="banner-video"
             autoPlay
             muted
             loop
             playsInline
             src="/Assets/banner_video.mp4"
-            >
+          >
             {/* Fallback for browsers that don't support video */}
             Your browser does not support the video tag.
-            </video>
+          </video>
 
           <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
           <Hero />
         </div>
-        <AnimatedSection 
-          animation="slideRight" 
-          delay={0.2} 
+        <AnimatedSection
+          animation="slideRight"
+          delay={0.2}
           className="absolute right-[-30px]"
         >
           <Image
@@ -94,14 +94,14 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
           <AnimatedSection animation="fadeUp" delay={0.3}>
             <About />
           </AnimatedSection>
-          
+
           <div>
             {/* <AnimatedSection animation="fadeUp" delay={0.4}>
               <h1 className={`${styles.heading} p-2 font-Monserrat`}>
                 Latest Prompts
               </h1>
             </AnimatedSection> */}
-            
+
             {/* <AnimatedSection animation="fadeUp" delay={0.5}>
               <div className="w-full flex flex-wrap mt-5">
                 {loading ? (
@@ -118,9 +118,12 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
                 )}
               </div>
             </AnimatedSection> */}
-            
+
             <br />
-            
+            <AnimatedSection animation="slideLeft" delay={0.3}>
+              <Future />
+            </AnimatedSection>
+
             {/* Web3 Marketplace Preview */}
             <AnimatedSection animation="fadeUp" delay={0.6}>
               <div className="my-12">
@@ -132,39 +135,36 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
                 <p className="text-gray-600 dark:text-gray-400 text-lg mb-6 text-center">
                   Discover and trade AI prompt NFTs on the blockchain
                 </p>
-                <Web3Marketplace 
-                  title="Featured NFT Prompts" 
-                  showFilters={false} 
+                <Web3Marketplace
+                  title="Featured NFT Prompts"
+                  showFilters={false}
                   maxItems={4}
                 />
               </div>
             </AnimatedSection>
-            
+
             <br />
-            
+
             {/* <AnimatedSection animation="fadeUp" delay={0.2}>
               <BestSellers />
             </AnimatedSection> */}
-            
-            <AnimatedSection animation="slideLeft" delay={0.3}>
-              <Future />
-            </AnimatedSection>
-            
+
+
             {/* <AnimatedSection animation="scaleUp" delay={0.4}>
               <Partners />
             </AnimatedSection> */}
-            
+
             {/* <AnimatedSection animation="rotateIn" delay={0.5}>
               <SellersBanner />
             </AnimatedSection> */}
-            
+
             <br />
             <br />
-            
+
             <AnimatedSection animation="fadeIn" delay={0.2}>
               <Divider className="bg-[#ffffff23]" />
             </AnimatedSection>
-            
+
             <AnimatedSection animation="fadeUp" delay={0.3}>
               <Footer />
             </AnimatedSection>
