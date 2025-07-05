@@ -19,6 +19,18 @@ const navItems = [
     href: "/marketplace",
   },
   {
+    title: "Web3 Market",
+    href: "/web3-marketplace",
+  },
+  {
+    title: "Mint NFT",
+    href: "/mint-nft",
+  },
+  {
+    title: "My NFTs",
+    href: "/my-nfts",
+  },
+  {
     title: "Contact Us",
     href: "/contact",
   },

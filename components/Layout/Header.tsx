@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Navigation from "./Navigation";
@@ -8,6 +9,7 @@ import { RxCross1 } from "react-icons/rx";
 import { UserProfile } from "@clerk/nextjs";
 import { User } from "@clerk/nextjs/server";
 import DropDown from "./DropDown";
+import WalletConnection from "@/components/Web3/WalletConnection";
 
 type Props = {
   activeItem: number;
@@ -15,23 +17,20 @@ type Props = {
   isSellerExist: boolean | undefined;
 };
 
-const Header = ({ user, activeItem,isSellerExist }: Props) => {
+const Header = ({ user, activeItem, isSellerExist }: Props) => {
   const [active, setactive] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {
         setactive(true);
       } else {
         setactive(false);
       }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    });
+  }
 
   const handleClose = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -45,62 +44,53 @@ const Header = ({ user, activeItem,isSellerExist }: Props) => {
   };
 
   return (
-    <>
-      {/* Spacer div to maintain layout when header is fixed */}
-      {active && <div className="h-[80px]"></div>}
-      
-      <div
-        className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-all duration-300 ${
-          active ? "fixed top-0 left-0 bg-[#000]/95 backdrop-blur-md z-[9999] w-full" : "absolute top-0 left-0 z-[9999] w-full"
-        }`}
-        style={{
-          backgroundColor: active ? 'rgba(0, 0, 0, 0.95)' : 'transparent',
-        }}
-      >
-      <div className="w-[90%] mx-auto flex items-center justify-between">
+    <div
+      className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-opacity ${
+        active && "fixed top-0 left-0 bg-[#000] z-[9999]"
+      }`}
+    >
+      <div className="hidden md:w-[90%] mx-auto md:flex items-center justify-between">
         <div>
           <Link href={"/"}>
             <h1 className="font-Inter text-3xl cursor-pointer">
               <span
-              className="bg-clip-text text-transparent"
-              style={{
-                background: "linear-gradient(90deg, #835DED, #FF7E5F, #FEB47B)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+                className="bg-clip-text text-transparent"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #835DED, #FF7E5F, #FEB47B)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
               >
-              Prompt
+                Prompt
               </span>
               Verse
             </h1>
           </Link>
         </div>
-        
-        <div className="hidden md:flex items-center">
+        <div className="flex">
           <Navigation activeItem={activeItem} />
         </div>
-        
-        <div className="hidden md:flex items-center ml-10">    
+        <div className="flex items-center ml-10 space-x-4">
+          <AiOutlineSearch className="text-[25px] cursor-pointer" />
+
+          {/* Web3 Wallet Connection */}
+          <WalletConnection />
+
           {user ? (
-            <DropDown
-              user={user}
-              setOpen={setOpen}
-              handleProfile={handleProfile}
-              isSellerExist={isSellerExist}
-            />
+            <div>
+              <DropDown
+                user={user}
+                setOpen={setOpen}
+                handleProfile={handleProfile}
+                isSellerExist={isSellerExist}
+              />
+            </div>
           ) : (
             <Link href="/sign-in">
               <CgProfile className="text-[25px] cursor-pointer" />
             </Link>
           )}
-        </div>
-        
-        {/* Mobile menu button */}
-        <div className="md:hidden">
-          <FaBars
-            className="text-2xl cursor-pointer"
-            onClick={() => setOpen(!open)}
-          />
         </div>
       </div>
       {activeProfile && (
@@ -115,42 +105,55 @@ const Header = ({ user, activeItem,isSellerExist }: Props) => {
         </div>
       )}
 
-      {/* Mobile menu overlay */}
-      {open && (
-        <div
-          className="fixed md:hidden w-full h-screen top-0 left-0 z-[99999] bg-[unset]"
-          onClick={handleClose}
-          id="screen"
-        >
-          <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999]">
-            <div className="mt-20 p-5">
-              {/* Mobile logo */}
-              <div className="mb-8">
-                <Link href="/">
-                  <h1 className="font-Inter text-3xl cursor-pointer">
-                    <span className="text-[#835DED]">Prompt</span>Verse
-                  </h1>
-                </Link>
-              </div>
-              
-              <Navigation activeItem={activeItem} />
-              
-              {user && (
-                <div className="mt-6">
+      {/* for mobile screen */}
+      <div className="w-full md:hidden flex items-center justify-between">
+        <div>
+          <Link href="/">
+            <h1>
+              <Link href={"/"}>
+                <h1 className="font-Inter text-3xl cursor-pointer">
+                  <span className="text-[#835DED]">Prompt</span>Verse
+                </h1>
+              </Link>
+            </h1>
+          </Link>
+        </div>
+        <div>
+          <FaBars
+            className="text-2xl cursor-pointer"
+            onClick={() => setOpen(!open)}
+          />
+        </div>
+
+        {open && (
+          <div
+            className="fixed md:hidden w-full h-screen top-0 left-0 z-[99999] bg-[unset]"
+            onClick={handleClose}
+            id="screen"
+          >
+            <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999]">
+              <div className="mt-20 p-5 space-y-4">
+                <Navigation activeItem={activeItem} />
+
+                {/* Web3 Wallet Connection for Mobile */}
+                <div className="py-4">
+                  <WalletConnection />
+                </div>
+
+                {user && (
                   <DropDown
                     user={user}
                     setOpen={setOpen}
                     handleProfile={handleProfile}
                     isSellerExist={isSellerExist}
                   />
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-    </>
   );
 };
 
