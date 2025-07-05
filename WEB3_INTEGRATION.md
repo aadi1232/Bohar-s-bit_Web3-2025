@@ -47,7 +47,7 @@ npx hardhat run scripts/deploy.ts --network localhost
 ### 2. Frontend Configuration
 
 The contract is already configured in `lib/contractConfig.ts` with the deployed address:
-- Contract Address: `0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0`
+- Contract Address: `0x5FbDB2315678afecb367f032d93F642f64180aa3`
 - Network: Hardhat Localhost (Chain ID: 31337)
 - RPC URL: `http://127.0.0.1:8545`
 
@@ -172,7 +172,7 @@ The deployed contract can be verified using:
 
 ```bash
 # Contract Address
-0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 # Contract ABI and source available in:
 Web3/artifacts/contracts/PromptMarketplace.sol/
