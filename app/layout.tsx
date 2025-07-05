@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import Provider from "./(Providers)/NextUiProvider";
 import { Toaster } from "react-hot-toast";
-import Web3Provider from "./(Providers)/Web3Provider";
+import { Web3Provider } from "@/components/Web3/Web3Provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 

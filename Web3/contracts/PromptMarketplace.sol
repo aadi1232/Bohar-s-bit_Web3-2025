@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.28;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract PromptMarketplace is ERC721URIStorage, ERC2981, Ownable, ReentrancyGuard {
     uint256 private _tokenIds;
@@ -23,7 +23,9 @@ contract PromptMarketplace is ERC721URIStorage, ERC2981, Ownable, ReentrancyGuar
     event PromptSold(uint256 indexed tokenId, address indexed buyer, uint256 price);
     event PromptUnlisted(uint256 indexed tokenId);
 
-    constructor(address initialOwner) ERC721("PromptVersePrompt", "PVP") Ownable(initialOwner) {}
+    constructor(address initialOwner) ERC721("PromptVersePrompt", "PVP") Ownable(initialOwner) {
+        _setDefaultRoyalty(initialOwner, 250); // 2.5% default royalty
+    }
 
     modifier whenNotPaused() {
         require(!paused, "Contract is paused");
@@ -66,18 +68,28 @@ contract PromptMarketplace is ERC721URIStorage, ERC2981, Ownable, ReentrancyGuar
         require(item.isListed, "Not for sale");
         require(msg.value >= item.price, "Insufficient ETH sent");
         require(item.seller != msg.sender, "Cannot buy own NFT");
+        
         (address royaltyReceiver, uint256 royaltyAmount) = royaltyInfo(tokenId, item.price);
         uint256 sellerAmount = item.price - royaltyAmount;
         address seller = item.seller;
+        
+        // Remove listing before transfer
         listings[tokenId].isListed = false;
-        safeTransferFrom(seller, msg.sender, tokenId);
+        
+        // Transfer token from seller to buyer
+        _transfer(seller, msg.sender, tokenId);
+        
+        // Transfer payments
         if (royaltyAmount > 0 && royaltyReceiver != address(0)) {
             payable(royaltyReceiver).transfer(royaltyAmount);
         }
         payable(seller).transfer(sellerAmount);
+        
+        // Refund excess payment
         if (msg.value > item.price) {
             payable(msg.sender).transfer(msg.value - item.price);
         }
+        
         emit PromptSold(tokenId, msg.sender, item.price);
     }
 

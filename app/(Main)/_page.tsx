@@ -17,6 +17,7 @@ import PromptCardLoader from "@/utils/PromptCardLoader";
 import AnimatedSection from "@/components/Animations/AnimatedSection";
 import StaggeredAnimation from "@/components/Animations/StaggeredAnimation";
 import { usePageTransition } from "@/hooks/usePageTransition";
+import Web3Marketplace from "@/components/Web3/Web3Marketplace";
 
 type Props = {
   user: User | undefined;
@@ -115,6 +116,27 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
                       ))}
                   </>
                 )}
+              </div>
+            </AnimatedSection>
+            
+            <br />
+            
+            {/* Web3 Marketplace Preview */}
+            <AnimatedSection animation="fadeUp" delay={0.6}>
+              <div className="my-12">
+                <h1 className={`${styles.heading} p-2 font-Monserrat mb-4`}>
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Web3 NFT Marketplace
+                  </span>
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400 text-lg mb-6 text-center">
+                  Discover and trade AI prompt NFTs on the blockchain
+                </p>
+                <Web3Marketplace 
+                  title="Featured NFT Prompts" 
+                  showFilters={false} 
+                  maxItems={4}
+                />
               </div>
             </AnimatedSection>
             

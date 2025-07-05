@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Navigation from "./Navigation";
@@ -8,6 +9,7 @@ import { RxCross1 } from "react-icons/rx";
 import { UserProfile } from "@clerk/nextjs";
 import { User } from "@clerk/nextjs/server";
 import DropDown from "./DropDown";
+import WalletConnection from "@/components/Web3/WalletConnection";
 
 type Props = {
   activeItem: number;
@@ -68,8 +70,12 @@ const Header = ({ user, activeItem,isSellerExist }: Props) => {
         <div className="flex">
           <Navigation activeItem={activeItem} />
         </div>
-        <div className="flex items-center ml-10">
-          <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer" />
+        <div className="flex items-center ml-10 space-x-4">
+          <AiOutlineSearch className="text-[25px] cursor-pointer" />
+          
+          {/* Web3 Wallet Connection */}
+          <WalletConnection />
+          
           {user ? (
             <div>
               <DropDown
@@ -125,8 +131,14 @@ const Header = ({ user, activeItem,isSellerExist }: Props) => {
             id="screen"
           >
             <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999]">
-              <div className="mt-20 p-5">
+              <div className="mt-20 p-5 space-y-4">
                 <Navigation activeItem={activeItem} />
+                
+                {/* Web3 Wallet Connection for Mobile */}
+                <div className="py-4">
+                  <WalletConnection />
+                </div>
+                
                 {user && (
                   <DropDown
                     user={user}

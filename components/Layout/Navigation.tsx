@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 type Props = {
   activeItem: number;
@@ -18,6 +17,18 @@ const navItems = [
   {
     title: "Marketplace",
     href: "/marketplace",
+  },
+  {
+    title: "Web3 Market",
+    href: "/web3-marketplace",
+  },
+  {
+    title: "Mint NFT",
+    href: "/mint-nft",
+  },
+  {
+    title: "My NFTs",
+    href: "/my-nfts",
   },
   {
     title: "Contact Us",
@@ -39,7 +50,6 @@ const Navigation = ({ activeItem }: Props) => {
           </h5>
         </Link>
       ))}
-      <ConnectButton />
     </div>
   );
 };
