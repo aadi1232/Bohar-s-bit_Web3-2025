@@ -14,71 +14,18 @@ const MintNFTPage = async () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-[#110b30] to-[#1a0f3a] relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#835DED]/10 rounded-full filter blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#FF7E5F]/10 rounded-full filter blur-3xl animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#835DED]/5 rounded-full filter blur-3xl"></div>
+      
       <Header user={user.user} activeItem={0} isSellerExist={!!sellerInfo?.shop} />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Mint Your AI Prompt
-              </span>
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
-              Transform your AI prompts into valuable NFTs on the blockchain
-            </p>
-          </div>
-          
-          <MintPromptForm />
-          
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4">Why Mint Your Prompts?</h3>
-              <ul className="space-y-3 text-gray-600 dark:text-gray-400">
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Prove ownership and authenticity of your AI prompts</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Earn royalties from every future sale</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Build your reputation as a prompt creator</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Create a passive income stream</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4">How It Works</h3>
-              <ol className="space-y-3 text-gray-600 dark:text-gray-400">
-                <li className="flex items-start">
-                  <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">1</span>
-                  <span>Fill out the form with your prompt details</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">2</span>
-                  <span>Set your royalty percentage (0-10%)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">3</span>
-                  <span>Confirm the transaction in your wallet</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">4</span>
-                  <span>Your NFT is minted and ready to list!</span>
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
+      
+      <div className="relative z-10">
+        <MintPromptForm />
       </div>
-    </>
+    </div>
   );
 };
 

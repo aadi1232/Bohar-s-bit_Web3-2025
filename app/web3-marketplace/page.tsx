@@ -11,9 +11,7 @@ const Web3MarketplacePage = async () => {
   return (
     <>
       <Header user={user?.user} activeItem={1} isSellerExist={!!sellerInfo?.shop} />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-        <Web3Marketplace />
-      </div>
+      <Web3Marketplace />
     </>
   );
 };

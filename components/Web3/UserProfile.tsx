@@ -181,6 +181,7 @@ export const UserProfile: React.FC = () => {
                         prompt={prompt}
                         onUpdate={fetchUserPrompts}
                         showOwnerActions={true}
+                        purchasedPrompts={ownedPrompts.map(p => p.tokenId)}
                       />
                     ))}
                   </div>
@@ -219,6 +220,7 @@ export const UserProfile: React.FC = () => {
                         prompt={prompt}
                         onUpdate={fetchUserPrompts}
                         showOwnerActions={true}
+                        purchasedPrompts={listedPrompts.map(p => p.tokenId)}
                       />
                     ))}
                   </div>
@@ -262,6 +264,7 @@ export const UserProfile: React.FC = () => {
                           prompt={prompt}
                           onUpdate={fetchUserPrompts}
                           showOwnerActions={true}
+                          purchasedPrompts={unlistedPrompts.map(p => p.tokenId)}
                         />
                       ))}
                     </div>
