@@ -4,9 +4,13 @@ import React, { useState } from 'react';
 import { Button, Input, Textarea, Card, CardBody, CardHeader } from '@nextui-org/react';
 import { usePromptContract } from '@/hooks/usePromptContract';
 import { useWeb3 } from '@/components/Web3/Web3Provider';
-import { FaUpload, FaCoins, FaGem, FaRocket, FaStar, FaWallet, FaImage, FaTags, FaPercent, FaFileAlt } from 'react-icons/fa';
+import { FaUpload, FaCoins, FaGem, FaRocket, FaStar, FaWallet, FaImage, FaTags, FaPercent, FaFileAlt, FaRobot } from 'react-icons/fa';
 import { styles } from '@/utils/styles';
 import toast from 'react-hot-toast';
+import { AISuggestions } from './AISuggestions';
+import { AIEnhancement } from './AIEnhancement';
+import { AIAnalysis } from './AIAnalysis';
+import { AIPromptSuggestion, AIEnhancementResult, AIAnalysisScore } from '@/lib/ai/types';
 
 interface MintPromptFormProps {
   onMinted?: (tokenId: number) => void;
@@ -26,11 +30,52 @@ export const MintPromptForm: React.FC<MintPromptFormProps> = ({ onMinted }) => {
     royaltyPercentage: 5,
   });
 
+  // AI Analysis state
+  const [aiAnalysis, setAiAnalysis] = useState<AIAnalysisScore | null>(null);
+
   const handleInputChange = (field: string, value: string | number) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
+  };
+
+  // Handle AI suggestion selection
+  const handleSuggestionSelect = (suggestion: AIPromptSuggestion) => {
+    setFormData(prev => ({
+      ...prev,
+      title: suggestion.title,
+      description: suggestion.description,
+      prompt: suggestion.prompt,
+      category: suggestion.category,
+      tags: suggestion.tags.join(', '),
+      royaltyPercentage: prev.royaltyPercentage
+    }));
+    toast.success('AI suggestion applied successfully!');
+  };
+
+  // Handle AI enhancement
+  const handleEnhancement = (enhancement: AIEnhancementResult) => {
+    setFormData(prev => ({
+      ...prev,
+      prompt: enhancement.enhancedPrompt
+    }));
+    toast.success('Prompt enhanced successfully!');
+  };
+
+  // Handle AI analysis completion
+  const handleAnalysisComplete = (analysis: AIAnalysisScore) => {
+    setAiAnalysis(analysis);
+    // Auto-fill optimal price if analysis suggests it
+    if (analysis.priceRecommendation.optimal) {
+      const optimalPriceEth = parseFloat(analysis.priceRecommendation.optimal);
+      // Convert to rough royalty percentage (this is just for UX, actual pricing happens during listing)
+      const suggestedRoyalty = Math.min(10, Math.max(2, optimalPriceEth * 100));
+      setFormData(prev => ({
+        ...prev,
+        royaltyPercentage: Math.round(suggestedRoyalty * 2) / 2 // Round to nearest 0.5
+      }));
+    }
   };
 
   const createMetadata = () => {
@@ -170,6 +215,87 @@ export const MintPromptForm: React.FC<MintPromptFormProps> = ({ onMinted }) => {
               
               <CardBody className="space-y-8">
                 <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* AI Tools Section */}
+                  <Card className="p-6 bg-gradient-to-r from-[#835DED]/10 to-[#FF7E5F]/10 border border-[#835DED]/30 backdrop-blur-sm">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-[#835DED] to-[#FF7E5F] rounded-full flex items-center justify-center">
+                          <FaRobot className="text-white text-lg" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-white">AI-Powered Tools</h3>
+                          <p className="text-gray-400">Get suggestions, enhance your prompt, and analyze quality</p>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardBody>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {/* AI Suggestions */}
+                        <div className="space-y-2">
+                          <h4 className="text-white font-semibold text-sm">Get AI Suggestions</h4>
+                          <AISuggestions 
+                            category={formData.category}
+                            onSelectSuggestion={handleSuggestionSelect}
+                          />
+                          <p className="text-gray-400 text-xs">Generate creative prompt ideas based on your category</p>
+                        </div>
+
+                        {/* AI Enhancement */}
+                        <div className="space-y-2">
+                          <h4 className="text-white font-semibold text-sm">Enhance Prompt</h4>
+                          <AIEnhancement
+                            prompt={formData.prompt}
+                            category={formData.category}
+                            onEnhancement={handleEnhancement}
+                          />
+                          <p className="text-gray-400 text-xs">Improve your prompt with AI optimization</p>
+                        </div>
+
+                        {/* AI Analysis */}
+                        <div className="space-y-2">
+                          <h4 className="text-white font-semibold text-sm">Quality Analysis</h4>
+                          <AIAnalysis
+                            prompt={formData.prompt}
+                            title={formData.title}
+                            description={formData.description}
+                            category={formData.category}
+                            tags={formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag)}
+                            onAnalysisComplete={handleAnalysisComplete}
+                          />
+                          <p className="text-gray-400 text-xs">Get AI-powered quality score and pricing insights</p>
+                        </div>
+                      </div>
+
+                      {/* AI Analysis Results Summary */}
+                      {aiAnalysis && (
+                        <div className="mt-6 p-4 bg-[#1a0f3a] rounded-lg border border-[#835DED]/20">
+                          <div className="flex items-center justify-between mb-3">
+                            <h4 className="text-white font-semibold">AI Analysis Summary</h4>
+                            <div className="text-2xl font-bold text-[#835DED]">{aiAnalysis.overallScore}/100</div>
+                          </div>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div>
+                              <span className="text-gray-400">Clarity:</span>
+                              <span className="text-white ml-2">{aiAnalysis.breakdown.clarity}/100</span>
+                            </div>
+                            <div>
+                              <span className="text-gray-400">Creativity:</span>
+                              <span className="text-white ml-2">{aiAnalysis.breakdown.creativity}/100</span>
+                            </div>
+                            <div>
+                              <span className="text-gray-400">Market Ranking:</span>
+                              <span className="text-white ml-2">{aiAnalysis.marketComparison.ranking}</span>
+                            </div>
+                            <div>
+                              <span className="text-gray-400">Optimal Price:</span>
+                              <span className="text-[#FF7E5F] ml-2 font-semibold">{aiAnalysis.priceRecommendation.optimal} ETH</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </CardBody>
+                  </Card>
+
                   {/* Title and Description Row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="relative">
