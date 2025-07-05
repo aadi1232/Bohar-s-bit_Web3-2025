@@ -14,6 +14,7 @@ import Footer from "@/components/Layout/Footer";
 import { Divider } from "@nextui-org/react";
 import { User } from "@clerk/nextjs/server";
 import PromptCardLoader from "@/utils/PromptCardLoader";
+import AIAssistantButton from "@/components/ai/AIAssistantButton";
 
 type Props = {
   user: User | undefined;
@@ -113,6 +114,9 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
             <Footer />
           </div>
         </div>
+        
+        {/* AI Assistant for authenticated users */}
+        {user && <AIAssistantButton />}
       </div>
     </>
   );

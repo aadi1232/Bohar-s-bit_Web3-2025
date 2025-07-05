@@ -7,13 +7,22 @@ import {
   SelectItem,
   Selection,
   Textarea,
+  Tabs,
+  Tab,
+  Card,
+  CardBody,
 } from "@nextui-org/react";
 import { IoDocumentAttachOutline } from "react-icons/io5";
+import { FiZap, FiRefreshCw } from "react-icons/fi";
 import Image from "next/image";
 import React, { ChangeEvent, DragEvent, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
+import PromptSuggestionPanel from "@/components/ai/PromptSuggestionPanel";
+import PromptEnhancer from "@/components/ai/PromptEnhancer";
+import { PromptSuggestion } from "@/types/ai";
+import { usePromptEnhancement } from "@/hooks/usePromptEnhancement";
 
 type Props = {};
 
@@ -58,6 +67,8 @@ const UploadPrompt = (props: Props) => {
   const { userId } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState<Selection>(new Set([]));
+  const [activeTab, setActiveTab] = useState("manual");
+  const { generateTags, tags, loading: aiLoading } = usePromptEnhancement();
 
   const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -150,6 +161,57 @@ const UploadPrompt = (props: Props) => {
     }
   };
 
+  const handleSuggestionSelect = (suggestion: PromptSuggestion) => {
+    setPromptData({
+      ...promptData,
+      name: suggestion.title,
+      shortDescription: suggestion.description,
+      description: suggestion.content,
+      estimatedPrice: suggestion.estimatedPrice.toString(),
+      price: (suggestion.estimatedPrice * 0.8).toFixed(3), // 20% discount from estimated
+      tags: suggestion.tags.join(", "),
+    });
+    setCategory(new Set([suggestion.category]));
+    setActiveTab("manual");
+    toast.success("AI suggestion applied! You can modify the details as needed.");
+  };
+
+  const handleEnhancementResult = (enhancedPrompt: string, suggestedTags: string[], suggestedPrice: number) => {
+    setPromptData({
+      ...promptData,
+      description: enhancedPrompt,
+      tags: suggestedTags.join(", "),
+      price: suggestedPrice.toString(),
+    });
+    toast.success("Prompt enhanced! Review and adjust as needed.");
+  };
+
+  const handleGenerateAITags = async () => {
+    if (!promptData.description.trim()) {
+      toast.error("Please enter a prompt description first");
+      return;
+    }
+
+    const categoryString = Array.from(category).join(",");
+    if (!categoryString) {
+      toast.error("Please select a category first");
+      return;
+    }
+
+    const generatedTags = await generateTags({
+      promptContent: promptData.description,
+      category: categoryString,
+      title: promptData.name,
+    });
+
+    if (generatedTags.length > 0) {
+      setPromptData({
+        ...promptData,
+        tags: generatedTags.join(", "),
+      });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -188,10 +250,63 @@ const UploadPrompt = (props: Props) => {
 
   return (
     <div>
-      <h1 className={`${styles.heading} text-center py-5`}>
-        Upload Your Prompt
-      </h1>
-      <br />
+      <div className="flex items-center justify-center gap-3 py-5">
+        <FiZap className="text-[#835DED] text-3xl" />
+        <h1 className={`${styles.heading} text-center`}>
+          Upload Your Prompt
+        </h1>
+      </div>
+      
+      <Card className="w-[95%] m-auto mb-6 bg-[#1a1a2e] border border-[#16213e]">
+        <CardBody>
+          <Tabs 
+            selectedKey={activeTab} 
+            onSelectionChange={(key) => setActiveTab(key as string)}
+            className="w-full"
+            color="secondary"
+          >
+            <Tab key="manual" title="Manual Creation">
+              <div className="mt-4">
+                <p className={`${styles.paragraph} text-center mb-4`}>
+                  Create your prompt manually with full control over all details.
+                </p>
+              </div>
+            </Tab>
+            <Tab key="ai-suggestions" title="🤖 AI Suggestions">
+              <div className="mt-4">
+                <PromptSuggestionPanel 
+                  onSuggestionSelect={handleSuggestionSelect}
+                  defaultCategory={Array.from(category)[0] as string}
+                />
+              </div>
+            </Tab>
+            <Tab key="ai-enhance" title="✨ AI Enhance">
+              <div className="mt-4">
+                {promptData.description ? (
+                  <PromptEnhancer
+                    originalPrompt={promptData.description}
+                    category={Array.from(category)[0] as string || "Chatgpt"}
+                    onEnhancementResult={handleEnhancementResult}
+                  />
+                ) : (
+                  <div className="text-center py-8">
+                    <p className={`${styles.paragraph} mb-4`}>
+                      Enter a prompt description in the Manual Creation tab first, then come back here to enhance it with AI.
+                    </p>
+                    <Button
+                      onClick={() => setActiveTab("manual")}
+                      className="bg-[#835DED] text-white"
+                    >
+                      Go to Manual Creation
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </Tab>
+          </Tabs>
+        </CardBody>
+      </Card>
+
       <form className="w-[90%] m-auto" onSubmit={handleSubmit}>
         <Input
           type="text"
@@ -283,21 +398,34 @@ const UploadPrompt = (props: Props) => {
               </SelectItem>
             ))}
           </Select>
-          <Input
-            type="text"
-            label="Propmt tags *"
-            value={promptData.tags}
-            onChange={(e) =>
-              setPromptData((prevData) => ({
-                ...prevData,
-                tags: e.target.value,
-              }))
-            }
-            required
-            variant="bordered"
-            placeholder="AI,Photo,Arts"
-            className="md:ml-10"
-          />
+          <div className="md:ml-10 flex-1">
+            <div className="flex gap-2">
+              <Input
+                type="text"
+                label="Propmt tags *"
+                value={promptData.tags}
+                onChange={(e) =>
+                  setPromptData((prevData) => ({
+                    ...prevData,
+                    tags: e.target.value,
+                  }))
+                }
+                required
+                variant="bordered"
+                placeholder="AI,Photo,Arts"
+                className="flex-1"
+              />
+              <Button
+                onClick={handleGenerateAITags}
+                disabled={aiLoading || !promptData.description.trim()}
+                variant="flat"
+                className="bg-[#835DED20] text-[#835DED] hover:bg-[#835DED30] min-w-[120px]"
+                startContent={aiLoading ? <FiRefreshCw className="animate-spin" /> : <FiZap />}
+              >
+                {aiLoading ? 'AI...' : 'AI Tags'}
+              </Button>
+            </div>
+          </div>
         </div>
         <br />
         <div className="w-full">

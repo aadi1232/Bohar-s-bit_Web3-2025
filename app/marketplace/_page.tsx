@@ -10,6 +10,7 @@ import FilterPrompt from "@/components/Prompts/FilterPrompt";
 import { useRouter } from "next/navigation";
 import PromptCard from "@/components/Prompts/PromptCard";
 import PromptCardLoader from "@/utils/PromptCardLoader";
+import MarketplaceAIAssistant from "@/components/ai/MarketplaceAIAssistant";
 
 const MarketPlaceRouter = ({
   user,
@@ -23,6 +24,7 @@ const MarketPlaceRouter = ({
   const [prompts, setPrompts] = useState<any>();
   const [totalPrompts, setTotalPrompts] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const [currentFilter, setCurrentFilter] = useState<string>("");
 
   const router = useRouter();
 
@@ -37,6 +39,17 @@ const MarketPlaceRouter = ({
       console.error("Failed to fetch prompts:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCategoryFilter = (category: string) => {
+    setCurrentFilter(category);
+    // Filter prompts by category
+    if (totalPrompts) {
+      const filtered = totalPrompts.filter(
+        (prompt: any) => prompt.category.toLowerCase() === category.toLowerCase()
+      );
+      setPrompts(filtered.slice(0, 8)); // Show first 8 results
     }
   };
 
@@ -71,6 +84,14 @@ const MarketPlaceRouter = ({
       <div>
         <div className="w-[95%] md:w-[90%] xl:w-[85%] 2xl:w-[80%] m-auto">
           <div>
+            {/* AI Assistant Section */}
+            <div className="mt-6">
+              <MarketplaceAIAssistant
+                onCategoryFilter={handleCategoryFilter}
+                currentCategory={currentFilter}
+              />
+            </div>
+
             <div className="w-full">
               <FilterPrompt
                 setPrompts={setPrompts}
@@ -94,7 +115,7 @@ const MarketPlaceRouter = ({
               )}
             </div>
             <div className="w-full flex items-center justify-center mt-5">
-              {!loading && (
+              {!loading && !currentFilter && (
                 <Pagination
                   loop
                   showControls
