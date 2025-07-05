@@ -135,7 +135,10 @@ contract PromptMarketplace is ERC721URIStorage, ERC2981, Ownable, ReentrancyGuar
                     temp[count] = i;
                     count++;
                 }
-            } catch {}
+            } catch {
+                // Token doesn't exist or was burned, skip
+                continue;
+            }
         }
         uint256[] memory result = new uint256[](count);
         for (uint256 j = 0; j < count; j++) {
@@ -171,6 +174,11 @@ contract PromptMarketplace is ERC721URIStorage, ERC2981, Ownable, ReentrancyGuar
     }
     function resetTokenRoyalty(uint256 tokenId) external onlyOwner {
         _resetTokenRoyalty(tokenId);
+    }
+
+    // Get the current token count
+    function getCurrentTokenId() external view returns (uint256) {
+        return _tokenIds;
     }
 
     // ERC165 support
