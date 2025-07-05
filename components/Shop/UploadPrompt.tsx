@@ -14,27 +14,6 @@ import React, { ChangeEvent, DragEvent, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
-import { useAccount } from "wagmi";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { getPromptMarketplaceContract } from "@/utils/promptMarketplace";
-import { ethers } from "ethers";
-
-// Add a helper to upload metadata to IPFS via nft.storage (public API)
-async function uploadToIPFS(metadata: any): Promise<string> {
-  const apiKey = process.env.NEXT_PUBLIC_NFT_STORAGE_KEY;
-  if (!apiKey) throw new Error("NFT.Storage API key missing");
-  const res = await fetch("https://api.nft.storage/upload", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(metadata),
-  });
-  const data = await res.json();
-  if (!data.ok) throw new Error("IPFS upload failed");
-  return `ipfs://${data.value.cid}`;
-}
 
 type Props = {};
 
@@ -79,8 +58,6 @@ const UploadPrompt = (props: Props) => {
   const { userId } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState<Selection>(new Set([]));
-  const { isConnected } = useAccount();
-  const { openConnectModal } = useConnectModal();
 
   const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -175,74 +152,34 @@ const UploadPrompt = (props: Props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isConnected) {
-      openConnectModal?.();
-      return;
-    }
     setIsLoading(true);
-    try {
-      const categoryString = Array.from(category).join(",");
-      // 1. Upload prompt metadata to IPFS
-      const metadata = {
-        name: promptData.name,
-        description: promptData.description,
-        shortDescription: promptData.shortDescription,
-        images: promptData.images,
-        attachments: promptData.attachments,
-        category: categoryString,
-        tags: promptData.tags,
-      };
-      const metadataURI = await uploadToIPFS(metadata);
-      // 2. Mint prompt on-chain
-      const ethersProvider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await ethersProvider.getSigner();
-      const contract = getPromptMarketplaceContract(signer);
-      // Royalty: 500 = 5% (in basis points)
-      const royaltyBips = 500;
-      const tx = await contract.mintPrompt(metadataURI, royaltyBips);
-      const receipt = await tx.wait();
-      // Get tokenId from event
-      const mintedEvent = receipt.logs
-        .map((log: any) => {
-          try {
-            return contract.interface.parseLog(log);
-          } catch {
-            return null;
-          }
-        })
-        .find((log: any) => log && log.name === "PromptMinted");
-      if (!mintedEvent) throw new Error("Mint event not found");
-      const tokenId = mintedEvent.args.tokenId.toString();
-      // 3. List prompt for sale
-      const priceWei = ethers.parseEther(promptData.price);
-      const listTx = await contract.listPrompt(tokenId, priceWei);
-      await listTx.wait();
-      // 4. Save to backend
-      await axios.post("/api/upload-prompt", {
+    const categoryString = Array.from(category).join(",");
+    await axios
+      .post("/api/upload-prompt", {
         ...promptData,
         category: categoryString,
         sellerId: userId,
-        contractTokenId: tokenId,
-        metadataURI,
+      })
+      .then((res) => {
+        setIsLoading(false);
+        toast.success("Prompt uploaded successfully");
+        setPromptData({
+          name: "",
+          shortDescription: "",
+          description: "",
+          images: [],
+          attachments: [],
+          estimatedPrice: "",
+          price: "",
+          tags: "",
+        });
+        redirect("/shop/prompts");
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(error);
+        // toast.error(error.data.message);
       });
-      setIsLoading(false);
-      toast.success("Prompt uploaded and minted successfully");
-      setPromptData({
-        name: "",
-        shortDescription: "",
-        description: "",
-        images: [],
-        attachments: [],
-        estimatedPrice: "",
-        price: "",
-        tags: "",
-      });
-      redirect("/shop/prompts");
-    } catch (error: any) {
-      setIsLoading(false);
-      toast.error(error?.message || "Upload failed");
-      console.error(error);
-    }
   };
 
   const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
