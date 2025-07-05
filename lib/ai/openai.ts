@@ -14,7 +14,7 @@ export const openai = apiKey ? new OpenAI({
 
 export const AI_CONFIG = {
   model: process.env.AI_MODEL || 'gpt-3.5-turbo',
-  maxTokens: parseInt(process.env.AI_MAX_TOKENS || '500'),
+  maxTokens: parseInt(process.env.AI_MAX_TOKENS || '1000'), // Increased default to 1000
   temperature: 0.7,
   enabled: !!apiKey,
 } as const;

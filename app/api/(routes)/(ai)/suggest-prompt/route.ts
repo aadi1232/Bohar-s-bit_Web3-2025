@@ -41,12 +41,13 @@ export async function POST(req: NextRequest) {
 
     For each prompt, provide:
     1. A catchy title (max 60 characters)
-    2. A brief description (max 120 characters)
-    3. The actual prompt content
+    2. A brief description (max 200 characters)
+    3. The actual prompt content (max 1000 characters)
     4. Relevant tags (5-8 tags)
     5. Estimated price in ETH (0.001 to 0.1 range)
     6. Market demand level (Low/Medium/High)
 
+    IMPORTANT: Return only the following fields for each prompt object: title, description, content, tags, estimatedPrice, difficulty, marketDemand. Do NOT include any extra fields or explanations.
     Respond in JSON format with an array of prompt objects.
     `;
 
