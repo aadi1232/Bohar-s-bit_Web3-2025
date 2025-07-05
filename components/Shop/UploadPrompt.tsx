@@ -9,7 +9,6 @@ import {
   SelectItem,
   Selection,
   Textarea,
- HEAD
   Tabs,
   Tab,
   Card,
@@ -18,9 +17,7 @@ import {
 import { IoDocumentAttachOutline } from "react-icons/io5";
 import { FiZap, FiRefreshCw } from "react-icons/fi";
 
-  Card,
-} from "@nextui-org/react";
-import { IoDocumentAttachOutline } from "react-icons/io5";
+
 import { HiOutlineCloudUpload } from "react-icons/hi";
 import { MdOutlineImage } from "react-icons/md";
  
@@ -259,7 +256,7 @@ const UploadPrompt = (props: Props) => {
   };
 
   return (
-<<<<<<< HEAD
+
     <div>
       <div className="flex items-center justify-center gap-3 py-5">
         <FiZap className="text-[#835DED] text-3xl" />
@@ -450,115 +447,8 @@ const UploadPrompt = (props: Props) => {
             className="hidden"
             onChange={handleImageFileChange}
           />
-          <label
-            htmlFor="file"
-            className={`w-full rounded-md min-h-[15vh] border-white p-3 border  flex items-center justify-center ${
-              dragging ? "bg-blue-500" : "bg-transparent"
-            }`}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleImageDrop}
-          >
-            {promptData.images.length !== 0 ? (
-              <div className="w-full flex flex-wrap">
-                {promptData.images.map((item) => (
-                  <Image
-                    src={item}
-                    alt=""
-                    width={500}
-                    height={400}
-                    key={item}
-                    className="w-full md:w-[48%] object-cover md:m-2 my-2"
-=======
-    <div className="min-h-screen relative">
-      {/* Background Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-[#835DED]/10 rounded-full filter blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#FF7E5F]/10 rounded-full filter blur-3xl animate-pulse"></div>
-      
-      <div className="relative z-10 py-8">
-        {/* Header Section */}
-        <div className="text-center mb-12 animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-Monserrat">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#835DED] to-[#FF7E5F]">
-              Upload Your Prompt
-            </span>
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Create and share your AI prompts with the community
-          </p>
-          <div className="w-32 h-1 bg-gradient-to-r from-[#835DED] to-[#FF7E5F] rounded-full mx-auto mt-4"></div>
-        </div>
-
-        {/* Form Container */}
-        <div className="max-w-7xl mx-auto px-4">
-          <Card className="p-10 bg-[#130f23]/80 border border-[#835DED]/20 backdrop-blur-sm hover:border-[#835DED]/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 animate-fade-in-up">
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {/* Basic Information Section */}
-              <div className="space-y-6">
-                <div className="flex items-center space-x-3 mb-8">
-                  <div className="p-3 bg-[#835DED]/20 rounded-lg">
-                    <MdOutlineImage className="text-[#835DED] text-2xl" />
-                  </div>
-                  <h2 className="text-2xl font-semibold text-white">Basic Information</h2>
-                </div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <Input
-                    type="text"
-                    label="Title"
-                    value={promptData.name}
-                    onChange={(e) =>
-                      setPromptData({ ...promptData, name: e.target.value })
-                    }
-                    variant="bordered"
-                    required
-                    placeholder="Enter your prompt title"
-                    classNames={{
-                      input: "text-white",
-                      label: "text-gray-300",
-                      inputWrapper: "border-[#835DED]/30 hover:border-[#835DED]/50 focus-within:border-[#835DED] bg-[#130f23]/50",
-                    }}
->>>>>>> main
-                  />
-
-                  <Input
-                    type="text"
-                    label="Short Description"
-                    value={promptData.shortDescription}
-                    onChange={(e) =>
-                      setPromptData({ ...promptData, shortDescription: e.target.value })
-                    }
-                    variant="bordered"
-                    required
-                    placeholder="Enter a short description for your prompt"
-                    classNames={{
-                      input: "text-white",
-                      label: "text-gray-300",
-                      inputWrapper: "border-[#835DED]/30 hover:border-[#835DED]/50 focus-within:border-[#835DED] bg-[#130f23]/50",
-                    }}
-                  />
-                </div>
-
-                <Textarea
-                  variant="bordered"
-                  value={promptData.description}
-                  onChange={(e) =>
-                    setPromptData((prevData) => ({
-                      ...prevData,
-                      description: e.target.value,
-                    }))
-                  }
-                  required
-                  label="Detailed Description"
-                  size="lg"
-                  placeholder="Write a detailed description for your prompt"
-                  classNames={{
-                    input: "text-white",
-                    label: "text-gray-300",
-                    inputWrapper: "border-[#835DED]/30 hover:border-[#835DED]/50 focus-within:border-[#835DED] bg-[#130f23]/50",
-                  }}
-                  minRows={4}
-                />
+         
+           
               </div>
 
               {/* Pricing and Category Section - Combined */}
@@ -804,10 +694,8 @@ const UploadPrompt = (props: Props) => {
                 </Button>
               </div>
             </form>
-          </Card>
+        
         </div>
-      </div>
-    </div>
   );
 };
 
