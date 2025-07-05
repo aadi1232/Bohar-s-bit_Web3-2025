@@ -6,6 +6,7 @@ import ShopAllOrders from "@/components/Shop/ShopAllOrders";
 import { styles } from "@/utils/styles";
 import { AiOutlineMoneyCollect } from "react-icons/ai";
 import { BiBorderLeft } from "react-icons/bi";
+import { Card } from "@nextui-org/react";
 
 const ShopRoot = ({
   ordersData,
@@ -20,61 +21,102 @@ const ShopRoot = ({
   );
 
   return (
-    <div>
-      <div className="mt-[5px] min-h-screen">
-        <div className="grid grid-cols-[75%,25%]">
-          <div className="p-8">
-            <OrderAnalytics isDashboard={true} />
-          </div>
-
-          <div className="pt-[80px] pr-8">
-            <div className="w-full bg-[#111C43] rounded-sm shadow">
-              <div className="flex items-center p-5 justify-between">
-              <div className="w-full flex flex-col items-center">
-                  <BiBorderLeft className="text-[#45CBA0] text-[30px]" />
-                  <h5 className="pt-2 font-Poppins text-[#fff] text-[20px]">
-                    {ordersData?.length}
-                  </h5>
-                  <h5 className="py-2 font-Poppins text-[#45CBA0] text-[17px] font-[400]">
-                    Total Sales
-                  </h5>
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full bg-[#111C43] rounded-sm shadow my-8">
-              <div className="flex items-center p-5 justify-between">
-                <div className="w-full flex flex-col items-center">
-                  <AiOutlineMoneyCollect className="text-[#45CBA0] text-[30px]" />
-                  <h5 className="pt-2 font-Poppins text-[#fff]  text-[20px]">
-                    US$ {totalSales}
-                  </h5>
-                  <h5 className="py-2 font-Poppins text-[#45CBA0] text-[17px] font-[400]">
-                    Total Sales
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#110b30] to-[#1a0f3a] relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#835DED]/10 rounded-full filter blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#FF7E5F]/10 rounded-full filter blur-3xl animate-pulse"></div>
+      
+      <div className="relative z-10 px-4 py-8">
+        {/* Header Section */}
+        <div className="text-center mb-12 animate-fade-in-up">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-Monserrat">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#835DED] to-[#FF7E5F]">
+              Dashboard
+            </span>
+          </h1>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            Monitor your sales performance and manage your AI prompts
+          </p>
+          <div className="w-32 h-1 bg-gradient-to-r from-[#835DED] to-[#FF7E5F] mx-auto rounded-full mt-4"></div>
         </div>
 
-        <div className="grid grid-cols-[65%,34%] mt-[-20px]">
-          <div className="bg-[#111c43] w-[94%] mt-[30px] h-[43vh] shadow-sm m-auto">
-            <h1
-              className={`${styles.label} !text-[20px]
-             px-5 py-2 !text-start`}
-            >
-              All Prompts
-            </h1>
-            <div className="mt-[-30px]">
-              <AllPrompts promptsData={promptsData} isDashboard={true} />
+        {/* Main Dashboard Grid */}
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 mb-8">
+            {/* Analytics Section */}
+            <div className="xl:col-span-3 animate-fade-in-up">
+              <Card className="p-6 bg-[#130f23]/80 border border-[#835DED]/20 backdrop-blur-sm hover:border-[#835DED]/40 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/20">
+                <OrderAnalytics isDashboard={true} />
+              </Card>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="xl:col-span-1 flex flex-col gap-6 animate-fade-in-up">
+              <Card className="p-5 bg-gradient-to-br from-[#835DED]/15 to-[#9B59B6]/20 border border-[#835DED]/25 backdrop-blur-sm hover:border-[#835DED]/40 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20">
+                <div className="w-full flex flex-col items-center text-center">
+                  <div className="p-3 bg-[#835DED]/20 rounded-full mb-4">
+                    <BiBorderLeft className="text-[#9B59B6] text-[32px]" />
+                  </div>
+                  <h5 className="text-2xl font-bold text-white mb-2">
+                    {ordersData?.length || 0}
+                  </h5>
+                  <h5 className="text-[#835DED] text-lg font-semibold">
+                    Total Orders
+                  </h5>
+                </div>
+              </Card>
+
+              <Card className="p-5 bg-gradient-to-br from-[#835DED]/15 to-[#9B59B6]/20 border border-[#835DED]/25 backdrop-blur-sm hover:border-[#835DED]/40 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20">
+                <div className="w-full flex flex-col items-center text-center">
+                  <div className="p-3 bg-[#835DED]/20 rounded-full mb-4">
+                    <AiOutlineMoneyCollect className="text-[#9B59B6] text-[32px]" />
+                  </div>
+                  <h5 className="text-2xl font-bold text-white mb-2">
+                    ${totalSales || 0}
+                  </h5>
+                  <h5 className="text-[#9B59B6] text-lg font-semibold">
+                    Total Revenue
+                  </h5>
+                </div>
+              </Card>
             </div>
           </div>
-          <div className="p-3">
-            <h5 className="text-[#fff] text-[20px] font-[400] font-Poppins pb-3">
-              Recent Orders
-            </h5>
-            <ShopAllOrders isDashboard={true} ordersData={ordersData} />
+
+          {/* Bottom Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* All Prompts */}
+            <div className="lg:col-span-2 animate-fade-in-up">
+              <Card className="p-6 bg-[#130f23]/80 border border-[#835DED]/20 backdrop-blur-sm hover:border-[#835DED]/40 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg hover:shadow-purple-500/20">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-white">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#835DED] to-[#FF7E5F]">
+                      All Prompts
+                    </span>
+                  </h2>
+                  <div className="w-16 h-1 bg-gradient-to-r from-[#835DED] to-[#FF7E5F] rounded-full"></div>
+                </div>
+                <div className="overflow-hidden rounded-lg">
+                  <AllPrompts promptsData={promptsData} isDashboard={true} />
+                </div>
+              </Card>
+            </div>
+
+            {/* Recent Orders */}
+            <div className="lg:col-span-1 animate-fade-in-up">
+              <Card className="p-6 bg-[#130f23]/80 border border-[#835DED]/20 backdrop-blur-sm hover:border-[#835DED]/40 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg hover:shadow-purple-500/20 h-full">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold text-white">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#835DED] to-[#FF7E5F]">
+                      Recent Orders
+                    </span>
+                  </h2>
+                  <div className="w-12 h-1 bg-gradient-to-r from-[#835DED] to-[#FF7E5F] rounded-full"></div>
+                </div>
+                <div className="overflow-hidden">
+                  <ShopAllOrders isDashboard={true} ordersData={ordersData} />
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </div>

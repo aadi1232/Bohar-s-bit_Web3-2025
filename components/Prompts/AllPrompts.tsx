@@ -55,44 +55,59 @@ const AllPrompts = ({
             "& .MuiDataGrid-root": {
               border: "none",
               outline: "none",
+              backgroundColor: "transparent",
             },
             "& .css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon": {
               color: "#fff",
             },
             "& .MuiDataGrid-sortIcon": {
-              color: "#fff",
+              color: "#835DED",
             },
             "& .MuiDataGrid-row": {
               color: "#fff",
-              borderBottom: "1px solid #ffffff30!important",
+              borderBottom: "1px solid #835DED30!important",
+              "&:hover": {
+                backgroundColor: "#835DED10!important",
+              },
             },
             "& .MuiTablePagination-root": {
               color: "#fff",
             },
             "& .MuiDataGrid-cell": {
               borderBottom: "none!important",
+              color: "#fff",
             },
             "& .name-column--cell": {
               color: "#fff",
             },
             "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "#3e4396",
-              borderBottom: "none",
+              backgroundColor: "#835DED20",
+              borderBottom: "1px solid #835DED50",
               color: "#fff",
+              fontWeight: "600",
             },
             "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: "#1F2A40",
+              backgroundColor: "transparent",
             },
             "& .MuiDataGrid-footerContainer": {
-              color: "dark",
-              borderTop: "none",
-              backgroundColor: "#3e4396",
+              color: "#fff",
+              borderTop: "1px solid #835DED30",
+              backgroundColor: "#835DED10",
             },
             "& .MuiCheckbox-root": {
-              color: `#b7ebde !important`,
+              color: `#835DED !important`,
             },
             "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
               color: `#fff !important`,
+            },
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: "#835DED20",
+            },
+            "& .MuiDataGrid-menuIcon": {
+              color: "#835DED",
+            },
+            "& .MuiDataGrid-filterIcon": {
+              color: "#835DED",
             },
           }}
         >

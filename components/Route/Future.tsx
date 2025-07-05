@@ -20,18 +20,16 @@ const Future = (props: Props) => {
       </div>
       <div className="col-span-1 w-full flex justify-center items-center">
         <div className="2xl:w-[60%]">
-          <Button
-            className={`${styles.button} mb-[30px] h-[37px] bg-[#12211f]`}
-          >
-            Future
-          </Button>
+            <Button className={`${styles.button} mb-[30px] h-[37px] bg-purple-600 text-white`}>
+            Future of Prompt Engineering
+            </Button>
           <h5 className={`${styles.heading} mb-5 !leading-[50px]`}>
-            Unleashing The Glorious Future Of Ai generated Images
+            Redefining Ownership in the Age of AI
           </h5>
           <p className={`${styles.paragraph} pb-5`}>
-            One of the most prominent techniques in AI image generation is the
-            use of Generative Adversarial Networks
+            PromptVerse is paving the way for prompt creators to earn, own, and innovate. Our decentralized platform ensures every prompt is attributed, verified, and rewarded — creating a sustainable AI creator economy.
           </p>
+
         </div>
       </div>
     </div>

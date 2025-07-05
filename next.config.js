@@ -4,7 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ["pixner.net", "res.cloudinary.com"],
+    domains: ["pixner.net", "res.cloudinary.com", "i.pinimg.com", "unsplash.com", "images.unsplash.com"],
   },
   swcMinify: true,
 };

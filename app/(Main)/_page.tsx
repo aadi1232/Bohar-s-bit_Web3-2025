@@ -14,7 +14,13 @@ import Footer from "@/components/Layout/Footer";
 import { Divider } from "@nextui-org/react";
 import { User } from "@clerk/nextjs/server";
 import PromptCardLoader from "@/utils/PromptCardLoader";
+
 import AIAssistantButton from "@/components/ai/AIAssistantButton";
+
+import AnimatedSection from "@/components/Animations/AnimatedSection";
+import StaggeredAnimation from "@/components/Animations/StaggeredAnimation";
+import { usePageTransition } from "@/hooks/usePageTransition";
+
 
 type Props = {
   user: User | undefined;
@@ -25,6 +31,7 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
   const [prompts, setPrompts] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const pageLoaded = usePageTransition();
 
   const fetchPromptsData = async () => {
     setLoading(true);
@@ -54,71 +61,103 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
   }
 
   return (
-    <>
+    <div className={`transition-opacity duration-1000 ease-out ${pageLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <div>
+        <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
         <div className="banner">
           {/* Add background video */}
-            <video
+          <video
             className="banner-video"
             autoPlay
             muted
             loop
             playsInline
             src="/Assets/banner_video.mp4"
-            >
+          >
             {/* Fallback for browsers that don't support video */}
             Your browser does not support the video tag.
-            </video>
 
-          <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
+          </video>
+
           <Hero />
         </div>
-        <Image
-          src={"https://pixner.net/aikeu/assets/images/footer/shape-two.png"}
-          width={120}
-          height={120}
-          alt=""
+        <AnimatedSection
+          animation="slideRight"
+          delay={0.2}
           className="absolute right-[-30px]"
-        />
+        >
+          <Image
+            src={"https://pixner.net/aikeu/assets/images/footer/shape-two.png"}
+            width={120}
+            height={120}
+            alt=""
+          />
+        </AnimatedSection>
         <br />
         <div className="w-[95%] md:w-[90%] xl:w-[80%] 2xl:w-[75%] m-auto">
-          <About />
+          <AnimatedSection animation="fadeUp" delay={0.3}>
+            <About />
+          </AnimatedSection>
+
           <div>
-            <h1 className={`${styles.heading} p-2 font-Monserrat`}>
-              Latest Prompts
-            </h1>
-            <div className="w-full flex flex-wrap mt-5">
-              {loading ? (
-                [...new Array(8)].map((i) => (
+            <AnimatedSection animation="fadeUp" delay={0.4}>
+              <h1 className={`${styles.heading} p-2 font-Monserrat`}>
+                Latest Prompts
+              </h1>
+            </AnimatedSection>
+
+            <AnimatedSection animation="fadeUp" delay={0.5}>
+              <div className="w-full flex flex-wrap mt-5">
+                {loading ? (
+                  [...new Array(8)].map((_, i) => (
+                    <PromptCardLoader key={i} />
+                  ))
+                ) : (
                   <>
-                    <PromptCardLoader />
+                    {prompts &&
+                      prompts.map((item: any) => (
+                        <PromptCard prompt={item} key={item.id} />
+                      ))}
                   </>
-                ))
-              ) : (
-                <>
-                  {prompts &&
-                    prompts.map((item: any) => (
-                      <PromptCard prompt={item} key={item.id} />
-                    ))}
-                </>
-              )}
-            </div>
+                )}
+              </div>
+            </AnimatedSection>
+
             <br />
-            <BestSellers />
-            <Future />
-            <Partners />
-            <SellersBanner />
+
+            <AnimatedSection animation="fadeUp" delay={0.2}>
+              <BestSellers />
+            </AnimatedSection>
+
+            <AnimatedSection animation="slideLeft" delay={0.3}>
+              <Future />
+            </AnimatedSection>
+
+            <AnimatedSection animation="scaleUp" delay={0.4}>
+              <Partners />
+            </AnimatedSection>
+
+            <AnimatedSection animation="rotateIn" delay={0.5}>
+              <SellersBanner />
+            </AnimatedSection>
+
             <br />
             <br />
-            <Divider className="bg-[#ffffff23]" />
-            <Footer />
+
+            <AnimatedSection animation="fadeIn" delay={0.2}>
+              <Divider className="bg-[#ffffff23]" />
+            </AnimatedSection>
+
+            <AnimatedSection animation="fadeUp" delay={0.3}>
+              <Footer />
+            </AnimatedSection>
           </div>
         </div>
         
         {/* AI Assistant for authenticated users */}
         {user && <AIAssistantButton />}
       </div>
-    </>
+    </div>
   );
 };
 
