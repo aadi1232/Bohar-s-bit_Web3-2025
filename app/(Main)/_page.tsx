@@ -96,13 +96,13 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
           </AnimatedSection>
           
           <div>
-            <AnimatedSection animation="fadeUp" delay={0.4}>
+            {/* <AnimatedSection animation="fadeUp" delay={0.4}>
               <h1 className={`${styles.heading} p-2 font-Monserrat`}>
                 Latest Prompts
               </h1>
-            </AnimatedSection>
+            </AnimatedSection> */}
             
-            <AnimatedSection animation="fadeUp" delay={0.5}>
+            {/* <AnimatedSection animation="fadeUp" delay={0.5}>
               <div className="w-full flex flex-wrap mt-5">
                 {loading ? (
                   [...new Array(8)].map((_, i) => (
@@ -117,7 +117,7 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
                   </>
                 )}
               </div>
-            </AnimatedSection>
+            </AnimatedSection> */}
             
             <br />
             
@@ -142,21 +142,21 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
             
             <br />
             
-            <AnimatedSection animation="fadeUp" delay={0.2}>
+            {/* <AnimatedSection animation="fadeUp" delay={0.2}>
               <BestSellers />
-            </AnimatedSection>
+            </AnimatedSection> */}
             
             <AnimatedSection animation="slideLeft" delay={0.3}>
               <Future />
             </AnimatedSection>
             
-            <AnimatedSection animation="scaleUp" delay={0.4}>
+            {/* <AnimatedSection animation="scaleUp" delay={0.4}>
               <Partners />
-            </AnimatedSection>
+            </AnimatedSection> */}
             
-            <AnimatedSection animation="rotateIn" delay={0.5}>
+            {/* <AnimatedSection animation="rotateIn" delay={0.5}>
               <SellersBanner />
-            </AnimatedSection>
+            </AnimatedSection> */}
             
             <br />
             <br />

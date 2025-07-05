@@ -72,7 +72,7 @@ const Header = ({ user, activeItem, isSellerExist }: Props) => {
           <Navigation activeItem={activeItem} />
         </div>
         <div className="flex items-center ml-10 space-x-4">
-          <AiOutlineSearch className="text-[25px] cursor-pointer" />
+        
 
           {/* Web3 Wallet Connection */}
           <WalletConnection />

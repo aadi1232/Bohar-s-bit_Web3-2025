@@ -15,10 +15,6 @@ const navItems = [
     href: "/about",
   },
   {
-    title: "Marketplace",
-    href: "/marketplace",
-  },
-  {
     title: "Web3 Market",
     href: "/web3-marketplace",
   },
@@ -30,10 +26,10 @@ const navItems = [
     title: "My NFTs",
     href: "/my-nfts",
   },
-  {
-    title: "Contact Us",
-    href: "/contact",
-  },
+  // {
+  //   title: "Contact Us",
+  //   href: "/contact",
+  // },
 ];
 
 const Navigation = ({ activeItem }: Props) => {
