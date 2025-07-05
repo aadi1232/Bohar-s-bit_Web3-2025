@@ -13,22 +13,25 @@ const About = (props: Props) => {
   return (
     <div className="w-full relative grid md:grid-cols-2 md:py-8">
       <div className="col-span-1 w-full md:w-[60%] md:mt-5 px-5 md:px-[unset]">
-        <Chip className={`${styles.button} mb-[30px] h-[37px] bg-[#12211f]`}>
-          AI Image
-        </Chip>
+       
         <h5 className={`${styles.heading} mb-5 !leading-[50px]`}>
-          Crafting Tomorrow&apos;s Images With Artificial Intelligence
+          Monetize Your AI Prompts with Web3 Technology
         </h5>
         <p className={`${styles.paragraph} pb-5`}>
-          AI image generation tools have emerged as powerful resources in the
-          realm of digital art and design. These cutting-edge tools leverage
-          advanced.
+          PromptVerse allows creators to turn their best AI prompts into NFTs that can be sold, traded, and resold — with built-in royalties. Unlock new revenue streams and take ownership of your creativity in the AI era.
         </p>
         <Button
-          className={`${styles.button} bg-[#835DED] font-[500] h-[45px]`}
+          className={`${styles.button} bg-gradient-to-r from-[#835DED] via-[#FF8C42] to-[#FF3C6F] font-[600] h-[50px] shadow-lg hover:scale-105 transition-transform duration-200`}
           onClick={() => router.push("/marketplace")}
+          radius="full"
+          size="lg"
+          endContent={
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          }
         >
-          Visit Shop
+          Explore Marketplace
         </Button>
       </div>
       <div className="col-span-1 my-10 md:mt-[unset]">

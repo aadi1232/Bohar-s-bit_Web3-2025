@@ -57,28 +57,29 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
   }
 
   return (
-    <div className={`transition-all duration-1000 ease-out ${pageLoaded ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'}`}>
+    <div className={`transition-opacity duration-1000 ease-out ${pageLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <div>
+        <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
         <div className="banner">
           {/* Add background video */}
-            <video
+          <video
             className="banner-video"
             autoPlay
             muted
             loop
             playsInline
             src="/Assets/banner_video.mp4"
-            >
+          >
             {/* Fallback for browsers that don't support video */}
             Your browser does not support the video tag.
-            </video>
 
-          <Header activeItem={0} user={user} isSellerExist={isSellerExist} />
+          </video>
+
           <Hero />
         </div>
-        <AnimatedSection 
-          animation="slideRight" 
-          delay={0.2} 
+        <AnimatedSection
+          animation="slideRight"
+          delay={0.2}
           className="absolute right-[-30px]"
         >
           <Image
@@ -93,14 +94,14 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
           <AnimatedSection animation="fadeUp" delay={0.3}>
             <About />
           </AnimatedSection>
-          
+
           <div>
             <AnimatedSection animation="fadeUp" delay={0.4}>
               <h1 className={`${styles.heading} p-2 font-Monserrat`}>
                 Latest Prompts
               </h1>
             </AnimatedSection>
-            
+
             <AnimatedSection animation="fadeUp" delay={0.5}>
               <div className="w-full flex flex-wrap mt-5">
                 {loading ? (
@@ -117,32 +118,32 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
                 )}
               </div>
             </AnimatedSection>
-            
+
             <br />
-            
+
             <AnimatedSection animation="fadeUp" delay={0.2}>
               <BestSellers />
             </AnimatedSection>
-            
+
             <AnimatedSection animation="slideLeft" delay={0.3}>
               <Future />
             </AnimatedSection>
-            
+
             <AnimatedSection animation="scaleUp" delay={0.4}>
               <Partners />
             </AnimatedSection>
-            
+
             <AnimatedSection animation="rotateIn" delay={0.5}>
               <SellersBanner />
             </AnimatedSection>
-            
+
             <br />
             <br />
-            
+
             <AnimatedSection animation="fadeIn" delay={0.2}>
               <Divider className="bg-[#ffffff23]" />
             </AnimatedSection>
-            
+
             <AnimatedSection animation="fadeUp" delay={0.3}>
               <Footer />
             </AnimatedSection>

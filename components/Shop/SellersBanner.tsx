@@ -13,7 +13,7 @@ const SellersBanner = (props: Props) => {
     <div className="w-full 2xl:w-[80%] 2xl:m-auto h-[30vh] flex items-center justify-center sellers-banner rounded-xl md:m-2">
       <div className="text-center">
         <h1 className={`${styles.heading} !text-white-950 font-Monserrat`}>
-          Start to selling with us
+          Start Selling AI Prompts on PromptVerse
         </h1>
         <br />
         <br />
