@@ -72,7 +72,7 @@ export const usePromptContract = () => {
     }
     
     setError(errorMessage);
-    toast.error(errorMessage);
+    // toast.error(errorMessage);
     return errorMessage;
   };
 
